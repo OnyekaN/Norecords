@@ -1,0 +1,6 @@
+{
+	"presets": [
+		["latest", { "modules: false }],
+		"env", "es2015", "stage-0", "react",
+	]
+}
