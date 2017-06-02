@@ -13,19 +13,8 @@ const compiler = webpack(webpackConfig);
 const index = require('./routes/index');
 const app = express();
 
-/*
-app.use(webpackDevMiddleware(compiler, {
-	hot: true,
-	filename: 'bundle.js',
-	publicPath: '/',
-	stats: {
-		colors: true,
-	},
-	historyApiFallback: true,
-}));
-*/
 // view engine setup
-//app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/app/'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -34,7 +23,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'app/assets')));
 
 app.use('/', index);
 //app.use('/users', users);
