@@ -36,7 +36,7 @@ class FetchAlbums extends React.Component {
 						albums[albumName].artist = album[0].artist;
 						albums[albumName].songs = album;	
 						if (album[0].artwork_path == "N/A") {
-							albums[albumName].art = "/images/not_available.jpg"; 
+							albums[albumName].art = "/images/not_available.png"; 
 						} else { 
 								albums[albumName].art = album[0].artwork_path + '.jpg'; 
 						}
@@ -50,11 +50,17 @@ class FetchAlbums extends React.Component {
 					return [value];
 				});	
 				albumsArray.sort((a,b) => {
-					const nameA = a.artist.toUpperCase()
-					const nameB = b.artist.toUpperCase()
-					if (nameA < nameB) { return -1; }
-					if (nameB > nameA) { return 1 }
+					if ( a.artist < b.artist ) { return -1}
+					if ( b.artist < a.artist ) { return 1}
 					return 0;
+
+					/*const nameA = a.artist.toUpperCase();
+					const nameB = b.artist.toUpperCase();
+					if (nameA < nameB) { return -1; }
+					if (nameB > nameA) { return 1; }
+					return 0;
+				*/
+
 				});
 				console.log(albumsArray.slice(0, 50))
 				this.setState({albums: albumsArray.slice(0, 1000)})
@@ -68,11 +74,17 @@ class FetchAlbums extends React.Component {
 				{this.state.albums.map(album =>
 					<div className="img-container" key={album.name}>
 					<img className="thumb-img" src={album.art} alt={album.name} />
-					<h4>{album.name} - {album.artist}</h4>
+						<div>	
+							<span>{album.name} - {album.artist}</span>
+						</div>
+
 					</div>
+
 				)}
 			</div>
+
 		);
+
 	}
 
 }

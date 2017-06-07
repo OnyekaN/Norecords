@@ -10191,7 +10191,7 @@ var FetchAlbums = function (_React$Component) {
 						albums[albumName].artist = album[0].artist;
 						albums[albumName].songs = album;
 						if (album[0].artwork_path == "N/A") {
-							albums[albumName].art = "/images/not_available.jpg";
+							albums[albumName].art = "/images/not_available.png";
 						} else {
 							albums[albumName].art = album[0].artwork_path + '.jpg';
 						}
@@ -10205,15 +10205,20 @@ var FetchAlbums = function (_React$Component) {
 					return [value];
 				});
 				albumsArray.sort(function (a, b) {
-					var nameA = a.artist.toUpperCase();
-					var nameB = b.artist.toUpperCase();
-					if (nameA < nameB) {
+					if (a.artist < b.artist) {
 						return -1;
 					}
-					if (nameB > nameA) {
+					if (b.artist < a.artist) {
 						return 1;
 					}
 					return 0;
+
+					/*const nameA = a.artist.toUpperCase();
+     const nameB = b.artist.toUpperCase();
+     if (nameA < nameB) { return -1; }
+     if (nameB > nameA) { return 1; }
+     return 0;
+     */
 				});
 				console.log(albumsArray.slice(0, 50));
 				_this2.setState({ albums: albumsArray.slice(0, 1000) });
@@ -10231,11 +10236,15 @@ var FetchAlbums = function (_React$Component) {
 						{ className: 'img-container', key: album.name },
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'thumb-img', src: album.art, alt: album.name }),
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'h4',
+							'div',
 							null,
-							album.name,
-							' - ',
-							album.artist
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'span',
+								null,
+								album.name,
+								' - ',
+								album.artist
+							)
 						)
 					);
 				})
