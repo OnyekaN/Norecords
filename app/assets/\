@@ -1,8 +1,9 @@
 body {
   padding: 50px;
   font: 12px "Lucida Grande", Times,sans-serif;
-	color: white !important;	background-color: black !important;
-	-background-image: url("/images/black_background.jpg") !important;
+	color: white !important;	
+	background-color: black !important;
+	background-image: url("/images/black_background.jpg") !important;
 }
 
 a {
@@ -12,10 +13,10 @@ a {
 #title-box {
 	margin-left: 45px;
 	margin-bottom: 10px;
-	font: 20px "Permanent Marker", sans-serif;
+	font: 20px "Helvetica Neue", sans-serif;
+
 }
 #collection-container {
-
 	-background-color: rgba(100, 100, 100, 0.3);
 	-height: 1000px;
 	width: 120%;
@@ -27,18 +28,16 @@ a {
 	overflow: hidden !important;
 	height: 305px;
 	width: 250px;
-	color: #fff;
+	color: #aaa;
 	border-radius: 6px;
-	transition: background-color 0.2s ease;
 }
 
 .img-container:hover {
 	-box-shadow: 0px 0px 40px blue;
 	background-color: rgba(80, 80, 80, 0.4);
-	color: #38c;
+	color: #ddf;
 	font-size: 1em;
-	font-weight: bold;
-
+	-font-weight: bold;
 }
 
 
@@ -48,6 +47,7 @@ a {
 	text-align: center;
 	font-family: 'Permanent Marker', sans-serif;
 	font-size: 0.9em;
+	color: white;
 }
 .thumb-img {
  height: 200px; 
