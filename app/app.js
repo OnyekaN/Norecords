@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import AlbumsComponent from './albums.component'
+import PlayerComponent from './player.component'
+
 
 ReactDOM.render(
-	<AlbumsComponent />,
-	document.getElementById('albums')
+	<PlayerComponent />,
+	document.getElementById('main')
 );
-
-
-console.log('Preparing albums');
 
 

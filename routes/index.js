@@ -96,5 +96,53 @@ router.get('/api/albums/:album', (req, res, next) => {
 	res.json(req.album);
 });
 
+router.get('/api/sorted_albums', (req, res, next) => {
+	const results = [];	
+	
+	pg.connect(connectionString, (err, client, done) => {
+		if (err) {
+			done();
+			console.log(err);
+			return res.status(500).json({success: false, data: err});
+		}
+		
+		const query = client.query('SELECT * FROM songs ORDER BY album DESC;')
+
+		query.on('row', (row) => {
+			results.push(row);
+		});
+
+		query.on('end', () => {
+			done();
+			const songs = results;
+			const albums = {};
+			let album = [];
+			let albumName = "";
+			songs.map(obj => {
+				if ( albumName == "" ) { albumName = obj.album };
+				if ( albumName == obj.album ) { album.push(obj) };
+				if ( obj.artwork_path == "N/A" ) { return }
+				if ( albumName != obj.album ) {
+					albums[albumName] = {};
+					albums[albumName].name = albumName;
+					albums[albumName].artist = album[0].artist;
+					albums[albumName].songs = album;
+					if ( album[0].artwork_path == "N/A") {
+						albums[albumName].art = "/images/not_available.png";
+					} else { 
+						albums[albumName].art = album[0].artwork_path + '.jpg';
+					}
+					albumName = obj.album;
+					album = []
+					album.push(obj);
+				}
+			});
+			return res.json(albums);
+
+		})
+	})
+
+});
+
 
 module.exports = router;
