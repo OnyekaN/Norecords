@@ -32,7 +32,7 @@ class CollectionComponent extends React.Component {
 	render() {
 		let left = this.props.sidebar ? "250px" : 0; 
 		return (
-			<div /*style={{marginLeft: left}}*/>
+			<div>
 				{this.state.albums.map(obj =>
 					<Album				
 						key={obj.name}

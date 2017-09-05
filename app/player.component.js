@@ -12,6 +12,7 @@ class PlayerComponent extends React.Component {
 		}
 
 		this.albumClick = this.albumClick.bind(this);
+		this.closeSidebar = this.closeSidebar.bind(this);
 	}
 
 	albumClick(album) {
@@ -20,7 +21,6 @@ class PlayerComponent extends React.Component {
 				showSidebar: !this.state.showSidebar,
 				album: album
 			});
-		console.log(album);
 		}
 		else { 
 			this.setState({
@@ -29,16 +29,22 @@ class PlayerComponent extends React.Component {
 			});	
 		}
 	}
+	closeSidebar() {
+		this.setState({
+			showSidebar: false,
+		})
+	}
 
 	render() {
 		let album = this.state.album;
-		const sidebar = ( <SidebarComponent album={album}/> );
+		const sidebar = ( <SidebarComponent album={album} closeSidebar={this.closeSidebar}/> );
 		return (
 			<div>
 				{this.state.showSidebar ? sidebar : null} 
 				<div id="spacer"></div>
 				<div id="collection">
-					<CollectionComponent clickHandler={this.albumClick} sidebar={this.state.showSidebar} />
+					<CollectionComponent clickHandler={this.albumClick} 
+						sidebar={this.state.showSidebar} />
 				</div>
 			</div>
 		);
