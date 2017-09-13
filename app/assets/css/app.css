@@ -60,45 +60,52 @@ a {
 	 padding: 10px;
 	 margin-left: 15px;
 	 margin-top: 15px;
-	 box-shadow: 0px 0px 24px #ddf;
+	 box-shadow: 0px 0px 30px #ddf;
 	 border-radius: 6px;
 }
 
 #sidebar {
-	padding: 20px;
+	padding: 10px;
 	position: fixed;
-	top: 0; left: 0;
-	height: 100%;
-	width: 300px;
+	bottom: 0; left: 0;
+	height: 200px;
+	width: 100%;
 	float: left;
-	background-color: rgba(200, 200, 200, 0.7);
-	overflow: scroll;
+	background-color: rgba(100, 100, 100, 0.6);
+	overflow: hide;
 }
 
 .sidebar-image-icon {
 	height: 170px;
 	width: 170px;
-	margin: 20px 10px 20px 40px;
+	margin: 10px 10px 20px 40px;
 	border: 2px solid grey;
 }
 
-#sidebar  h2, em {
+#sidebar h2, em {
 	-text-align: center;
 	color: #fff;
 	text-shadow: 0px 0px 3px #eee;
+	margin-top: 10px;
+}
+
+#sidebar h3 {
 }
 
 #sidebar button {
 	position: absolute;
-	top: 5px;
-	right: 10px;
+	top: -5px;
+	left: 7px;
 	color: black;
 }
 
 #sidebar ul {
-	margin-top: 20px;
+	margin-top: 5px;
 	list-style-type: none;
 	padding-left: 10px;
+	-webkit-column-count: 2;
+	-moz-column-count: 2;
+	column-count: 2;
 }
 
 #sidebar a {
@@ -128,11 +135,16 @@ a {
 
 }
 
+#sidebar .songs {
+	overflow: scroll;
+	height: 63px;
+}
+
 #sidebar iframe {
 	-position: absolute;
 	-top: 0;
 	-visibility: hidden;
-	margin: 30px 0 0 20px;
+	margin: -9px 0 0 20px;
 }
 
 .sidebar-play-button {

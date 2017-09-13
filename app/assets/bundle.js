@@ -11239,49 +11239,66 @@ var SidebarComponent = function (_React$Component) {
 			});
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
-				{ id: 'sidebar' },
+				{ id: 'sidebar', className: 'container-fluid' },
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'button',
-					{ type: 'button', className: 'btn button-outline-dark btn-sm', onClick: this.props.closeSidebar },
-					'X'
-				),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-image-icon', src: album.art, alt: album.name + " album cover" }),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'h3',
-					null,
-					album.artist
-				),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'h2',
-					null,
+					'div',
+					{ className: 'row' },
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'em',
-						null,
-						album.name
-					)
-				),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'ul',
-					null,
-					album.songs.map(function (obj) {
-						return obj.youtube_link != 'N/A' ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'li',
-							{ key: obj.song_name },
+						'div',
+						{ className: 'col-md-3' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'button',
+							{ type: 'button', className: 'btn btn-default btn-xs', onClick: this.props.closeSidebar },
+							'X'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-image-icon', src: album.art, alt: album.name + " album cover" })
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'col-md-6' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'h3',
+							null,
+							album.artist
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'h2',
+							null,
 							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								'a',
-								{ href: obj.youtube_link.replace('watch?v=', 'embed/') + '?autoplay=1', target: 'yt_iframe' },
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-play-button', src: 'images/play-button.png', alt: 'play button' }),
-								obj.song_name
+								'em',
+								null,
+								album.name
 							)
-						) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'li',
-							{ key: obj.song_name },
-							obj.song_name
-						);
-					})
-				),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('iframe', { height: '200px', width: '200px', src: '', name: 'yt_iframe' })
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'div',
+							{ className: 'songs' },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'ul',
+								null,
+								album.songs.map(function (obj) {
+									return obj.youtube_link != 'N/A' ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'li',
+										{ key: obj.song_name },
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+											'a',
+											{ href: obj.youtube_link.replace('watch?v=', 'embed/') + "?autoplay=1",
+												target: 'yt_iframe' },
+											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-play-button', src: 'images/play-button.png',
+												alt: 'play button' }),
+											obj.song_name
+										)
+									) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'li',
+										{ key: obj.song_name },
+										obj.song_name
+									);
+								})
+							)
+						)
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('iframe', { height: '200px', width: '200px', src: '', name: 'yt_iframe' })
+				)
 			);
 		}
 	}]);
