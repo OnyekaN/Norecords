@@ -21,7 +21,7 @@ class SidebarComponent extends React.Component {
 					</div>
 					<div className="col-md-6 col-sm-6 col-xs-4">
 						<h3>{album.artist}</h3>
-						<h2><em>{album.name}</em></h2>
+						<h2><b>{album.name}</b></h2>
 						<div className="songs">
 							<ul>
 								{album.songs.map(obj =>

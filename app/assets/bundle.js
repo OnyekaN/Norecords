@@ -11266,7 +11266,7 @@ var SidebarComponent = function (_React$Component) {
 							'h2',
 							null,
 							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								'em',
+								'b',
 								null,
 								album.name
 							)
