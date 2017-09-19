@@ -8,7 +8,8 @@ class PlayerComponent extends React.Component {
 		super(props);
 
 		this.state = {
-			showSidebar: false
+			showSidebar: false,
+			album: undefined
 		}
 
 		this.albumClick = this.albumClick.bind(this);

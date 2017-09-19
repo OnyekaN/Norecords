@@ -11146,7 +11146,8 @@ var PlayerComponent = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (PlayerComponent.__proto__ || Object.getPrototypeOf(PlayerComponent)).call(this, props));
 
 		_this.state = {
-			showSidebar: false
+			showSidebar: false,
+			album: undefined
 		};
 
 		_this.albumClick = _this.albumClick.bind(_this);
@@ -11245,7 +11246,7 @@ var SidebarComponent = function (_React$Component) {
 					{ className: 'row' },
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'div',
-						{ className: 'col-md-3' },
+						{ className: 'col-md-3 col-sm-3 col-xs-3' },
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							'button',
 							{ type: 'button', className: 'btn btn-default btn-xs', onClick: this.props.closeSidebar },
@@ -11255,7 +11256,7 @@ var SidebarComponent = function (_React$Component) {
 					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'div',
-						{ className: 'col-md-6' },
+						{ className: 'col-md-6 col-sm-6 col-xs-4' },
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							'h3',
 							null,
@@ -11297,7 +11298,7 @@ var SidebarComponent = function (_React$Component) {
 							)
 						)
 					),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('iframe', { height: '200px', width: '200px', src: '', name: 'yt_iframe' })
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('iframe', { height: '200px', width: '200px', src: '', frameBorder: '0', name: 'yt_iframe' })
 				)
 			);
 		}

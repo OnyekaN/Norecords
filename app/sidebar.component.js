@@ -15,11 +15,11 @@ class SidebarComponent extends React.Component {
 		return (
 			<div id="sidebar" className="container-fluid">
 				<div className="row">
-					<div className="col-md-3">
+					<div className="col-md-3 col-sm-3 col-xs-3">
 						<button type="button" className= "btn btn-default btn-xs" onClick={this.props.closeSidebar}>X</button>
 						<img className="sidebar-image-icon" src={album.art} alt={album.name + " album cover"}/>
 					</div>
-					<div className="col-md-6">
+					<div className="col-md-6 col-sm-6 col-xs-4">
 						<h3>{album.artist}</h3>
 						<h2><em>{album.name}</em></h2>
 						<div className="songs">
@@ -42,7 +42,7 @@ class SidebarComponent extends React.Component {
 							</ul>
 						</div>
 					</div>
-						<iframe height="200px" width="200px" src="" name="yt_iframe"></iframe>
+						<iframe height="200px" width="200px" src="" frameBorder="0"  name="yt_iframe"></iframe>
 
 				</div>
 			</div>		

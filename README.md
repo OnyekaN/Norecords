@@ -4,7 +4,7 @@ NORECORDS
 
 Welcome to NORECORDS; everything here is digital.
 
-This is an archive: it is my record collection with song links
+This is an archive of albums with links to individual tracks
 sourced from Youtube wherever avaiable.
 
 Enjoy.

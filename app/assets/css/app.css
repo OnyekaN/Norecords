@@ -39,7 +39,7 @@ a {
 
 .img-container:hover {
 	-box-shadow: 0px 0px 40px blue;
-	background-color: rgba(80, 80, 80, 0.4);
+	background-color: rgba(100, 100, 100, 0.3);
 	color: #38c;
 	font-size: 1em;
 	font-weight: bold;
@@ -68,28 +68,31 @@ a {
 	padding: 10px;
 	position: fixed;
 	bottom: 0; left: 0;
-	height: 200px;
+	height: 210px;
 	width: 100%;
 	float: left;
 	background-color: rgba(100, 100, 100, 0.6);
 	overflow: hide;
+	box-shadow: -5px 0 30px #111;
 }
 
 .sidebar-image-icon {
 	height: 170px;
 	width: 170px;
-	margin: 10px 10px 20px 40px;
-	border: 2px solid grey;
+	margin: 11px 10px 20px 40px;
+	border: 3px solid #fff;
 }
 
 #sidebar h2, em {
 	-text-align: center;
 	color: #fff;
-	text-shadow: 0px 0px 3px #eee;
+	text-shadow: 0px 0px 3px #111;
 	margin-top: 10px;
+	margin-bottom: 4px;
 }
 
 #sidebar h3 {
+	text-shadow: 0px 0px 2px #111;
 }
 
 #sidebar button {
@@ -97,6 +100,7 @@ a {
 	top: -5px;
 	left: 12px;
 	color: black;
+
 }
 
 #sidebar ul {
@@ -110,7 +114,7 @@ a {
 
 #sidebar a {
 	-color: black;
-	color: #cef;
+	color: #eee;
 	font-family: Helvetica;
 	text-decoration: none;
 	transition: text-shadow 0.2s ease;
@@ -128,6 +132,7 @@ a {
 	height: 20px;
 	width: auto;
 	white-space: nowrap;
+	text-shadow: 0px 0px 1px #111;
 }
 
 #sidebar li:hover {	
@@ -136,20 +141,22 @@ a {
 }
 
 #sidebar .songs {
+	position: absolute;
 	overflow: scroll;
 	height: 63px;
+	width: 560px;
 }
 
 #sidebar iframe {
 	-position: absolute;
 	-top: 0;
 	-visibility: hidden;
-	margin: -9px 0 0 20px;
+	margin: -4px 0 0 20px;
 }
 
 .sidebar-play-button {
-	height: 15px;
-	width: 15px;
+	height: 20px;
+	width: 20px;
 	-display: none;
 	margin-right: 8px;
 }
