@@ -4,10 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.js');
 
-const compiler = webpack(webpackConfig);
 
 const index = require('./routes/index');
 const app = express();
