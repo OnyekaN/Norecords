@@ -11061,7 +11061,7 @@ var CollectionComponent = function (_React$Component) {
 					}
 					return 0;
 				});
-				_this2.setState({ albums: albumsArray.slice(0, 1000) });
+				_this2.setState({ albums: albumsArray });
 			});
 		}
 	}, {

@@ -24,7 +24,7 @@ class CollectionComponent extends React.Component {
 					if ( b.artist < a.artist ) { return 1}
 					return 0;
 				});
-				this.setState({albums: albumsArray.slice(0, 1000)})
+				this.setState({albums: albumsArray})
 			});
 
 	}
