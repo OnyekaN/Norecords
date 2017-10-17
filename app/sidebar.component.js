@@ -1,5 +1,7 @@
+'use strict'
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SongComponent from './song.component';
 
 class SidebarComponent extends React.Component {
 	constructor(props) {
@@ -21,12 +23,14 @@ class SidebarComponent extends React.Component {
 					</div>
 					<div className="col-md-6 col-sm-6 col-xs-4">
 						<h3>{album.artist}</h3>
+						<SongComponent song="blah" artist="blah blah"/>
 						<h2><b>{album.name}</b></h2>
 						<div className="songs">
 							<ul>
 								{album.songs.map(obj =>
-									obj.youtube_link != 'N/A' ? 
+									obj.youtube_link != 'N/A' ? 	
 										( 
+
 										<li key={obj.song_name}>
 											<a href={obj.youtube_link.replace('watch?v=', 'embed/')+"?autoplay=1"} 
 													target="yt_iframe">
