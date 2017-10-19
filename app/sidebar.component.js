@@ -23,12 +23,10 @@ class SidebarComponent extends React.Component {
 					</div>
 					<div className="col-md-6 col-sm-6 col-xs-4">
 						<h3>{album.artist}</h3>
-					//	<SongComponent song="blah" artist="blah blah"/>
 						<h2><b>{album.name}</b></h2>
 						<div className="songs">
 							<ul>
-								{album.songs.map(obj => {
-							//				<SongComponent name=obj.song_name yt_link=obj.youtube_link />
+								{album.songs.map(obj => 
 								 	obj.youtube_link != 'N/A' ? 	
 										( 
 										<li key={obj.song_name}>
@@ -42,8 +40,7 @@ class SidebarComponent extends React.Component {
 										(
 										<li key={obj.song_name}>{obj.song_name}</li> 
 										)
-									})
-								}	
+									)}
 							</ul>
 						</div>
 					</div>

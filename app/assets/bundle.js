@@ -11270,8 +11270,6 @@ var SidebarComponent = function (_React$Component) {
 							null,
 							album.artist
 						),
-						'// ',
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__song_component__["a" /* default */], { song: 'blah', artist: 'blah blah' }),
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							'h2',
 							null,
@@ -11288,8 +11286,7 @@ var SidebarComponent = function (_React$Component) {
 								'ul',
 								null,
 								album.songs.map(function (obj) {
-									//				<SongComponent name=obj.song_name yt_link=obj.youtube_link />
-									obj.youtube_link != 'N/A' ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									return obj.youtube_link != 'N/A' ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 										'li',
 										{ key: obj.song_name },
 										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -25661,7 +25658,7 @@ var SongComponent = function (_React$Component) {
 	return SongComponent;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["a"] = (SongComponent);
+/* unused harmony default export */ var _unused_webpack_default_export = (SongComponent);
 
 /***/ })
 /******/ ]);
