@@ -28,9 +28,8 @@ class SidebarComponent extends React.Component {
 						<div className="songs">
 							<ul>
 								{album.songs.map(obj => {
-										console.log(obj);
 							//				<SongComponent name=obj.song_name yt_link=obj.youtube_link />
-								 /*	obj.youtube_link != 'N/A' ? 	
+								 	obj.youtube_link != 'N/A' ? 	
 										( 
 										<li key={obj.song_name}>
 											<a href={obj.youtube_link.replace('watch?v=', 'embed/')+"?autoplay=1"} 
@@ -39,16 +38,12 @@ class SidebarComponent extends React.Component {
 													alt="play button"/>{obj.song_name}
 											</a>
 										</li> 
-										)	 
-										(	
-											<SongComponent name=obj.song_name yt_link=obj.youtube_link/>
 										) :
 										(
 										<li key={obj.song_name}>{obj.song_name}</li> 
 										)
-									*/
-								}
-								)} 
+									})
+								}	
 							</ul>
 						</div>
 					</div>
