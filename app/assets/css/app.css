@@ -34,7 +34,7 @@ a {
 	width: 250px;
 	color: #fff;
 	border-radius: 6px;
-	transition: background-color 0.2s ease;
+	transition: all 0.2s ease;
 }
 
 .img-container:hover {
@@ -43,6 +43,7 @@ a {
 	color: #38c;
 	font-size: 1em;
 	font-weight: bold;
+	transform: scale(1.01);
 }
 
 
@@ -74,6 +75,7 @@ a {
 	background-color: rgba(100, 100, 100, 0.6);
 	overflow: hide;
 	box-shadow: -5px 0 30px #111;
+	z-index: 1000;
 }
 
 .sidebar-image-icon {
