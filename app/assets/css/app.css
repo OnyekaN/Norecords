@@ -23,18 +23,25 @@ a {
 #collection-container {
 	position: relative;
 	-background-color: rgba(100, 100, 100, 0.3);
-	width: 110%;
+}
+
+#main {
+	width: auto;
+	margin: 0 auto;
 }
 
 .img-container {
 	display: inline-block;
-	padding: 20px 10px 20px 10px;
+	margin: 10px;
+	margin-left: 0 auto;
+	margin-right: 0 auto;
+	padding: 10px 10px 20px 10px;
 	overflow: hidden !important;
-	height: 305px;
+	height: 285px;
 	width: 250px;
 	color: #fff;
 	border-radius: 6px;
-	transition: all 0.2s ease;
+	transition: all 0.2s ease, color 1ms;
 }
 
 .img-container:hover {
@@ -42,9 +49,10 @@ a {
 	background-color: rgba(100, 100, 100, 0.3);
 	color: #38c;
 	font-size: 1em;
-	font-weight: bold;
+	font-weight: 100;
 	transform: scale(1.01);
 }
+
 
 
 .img-container span {
