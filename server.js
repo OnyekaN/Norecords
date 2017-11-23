@@ -4,11 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.js');
 
-const compiler = webpack(webpackConfig);
 
 const index = require('./routes/index');
 const app = express();
@@ -18,7 +14,7 @@ app.set('views', path.join(__dirname, '/app/'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '/app/assets/', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
