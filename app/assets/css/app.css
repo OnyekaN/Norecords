@@ -27,14 +27,21 @@ a {
 
 #main {
 	width: auto;
-	margin: 0 auto;
+	justify-content: center;
+}
+
+#collection {
+	display: inline-flex;
+	flex-direction: row;
+	flex-flow: row wrap;
+	justify-content: flex-end;
+	background-color: grey;
 }
 
 .img-container {
-	display: inline-block;
+	-display: inline-block;
+	-margin: auto;
 	margin: 10px;
-	margin-left: 0 auto;
-	margin-right: 0 auto;
 	padding: 10px 10px 20px 10px;
 	overflow: hidden !important;
 	height: 285px;
