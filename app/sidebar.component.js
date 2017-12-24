@@ -15,13 +15,13 @@ class SidebarComponent extends React.Component {
 			return a.song_id - b.song_id;
 		});
 		return (
-			<div id="sidebar" className="container-fluid">
-				<div className="row">
-					<div className="col-md-3 col-sm-3 col-xs-3">
-						<button type="button" className= "btn btn-default btn-xs" onClick={this.props.closeSidebar}>X</button>
+			<div id="sidebar" className="">
+				<div className="sidebar-container">
+					<button type="button" className="" onClick={this.props.closeSidebar}>X</button>
+					<div className="icon-container">
 						<img className="sidebar-image-icon" src={album.art} alt={album.name + " album cover"}/>
 					</div>
-					<div className="col-md-6 col-sm-6 col-xs-4">
+					<div className="songs-container">
 						<h3>{album.artist}</h3>
 						<h2><b>{album.name}</b></h2>
 						<div className="songs">
@@ -32,8 +32,7 @@ class SidebarComponent extends React.Component {
 										<li key={obj.song_name}>
 											<a href={obj.youtube_link.replace('watch?v=', 'embed/')+"?autoplay=1"} 
 													target="yt_iframe">
-												<img className="sidebar-play-button" src="images/play-button.png" 
-													alt="play button"/>{obj.song_name}
+												<img className="sidebar-play-button" src="images/play-button.png" style={{verticalAlign: 'middle'}} alt="play button"/><span>{obj.song_name}</span>
 											</a>
 										</li> 
 										) :

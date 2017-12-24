@@ -11063,7 +11063,7 @@ var CollectionComponent = function (_React$Component) {
 					}
 					return 0;
 				});
-				_this2.setState({ albums: albumsArray });
+				_this2.setState({ albums: albumsArray.slice(0, 400) });
 			});
 		}
 	}, {
@@ -11190,7 +11190,6 @@ var PlayerComponent = function (_React$Component) {
 				'div',
 				null,
 				this.state.showSidebar ? sidebar : null,
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { id: 'spacer' }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'div',
 					{ id: 'collection' },
@@ -11248,23 +11247,23 @@ var SidebarComponent = function (_React$Component) {
 			});
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
-				{ id: 'sidebar', className: 'container-fluid' },
+				{ id: 'sidebar', className: '' },
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'div',
-					{ className: 'row' },
+					{ className: 'sidebar-container' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'button',
+						{ type: 'button', className: '', onClick: this.props.closeSidebar },
+						'X'
+					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'div',
-						{ className: 'col-md-3 col-sm-3 col-xs-3' },
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'button',
-							{ type: 'button', className: 'btn btn-default btn-xs', onClick: this.props.closeSidebar },
-							'X'
-						),
+						{ className: 'icon-container' },
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-image-icon', src: album.art, alt: album.name + " album cover" })
 					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'div',
-						{ className: 'col-md-6 col-sm-6 col-xs-4' },
+						{ className: 'songs-container' },
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							'h3',
 							null,
@@ -11293,9 +11292,12 @@ var SidebarComponent = function (_React$Component) {
 											'a',
 											{ href: obj.youtube_link.replace('watch?v=', 'embed/') + "?autoplay=1",
 												target: 'yt_iframe' },
-											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-play-button', src: 'images/play-button.png',
-												alt: 'play button' }),
-											obj.song_name
+											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-play-button', src: 'images/play-button.png', style: { verticalAlign: 'middle' }, alt: 'play button' }),
+											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'span',
+												null,
+												obj.song_name
+											)
 										)
 									) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 										'li',

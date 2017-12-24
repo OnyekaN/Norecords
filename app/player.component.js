@@ -43,7 +43,6 @@ class PlayerComponent extends React.Component {
 		return (
 			<div>
 				{this.state.showSidebar ? sidebar : null} 
-				<div id="spacer"></div>
 				<div id="collection">
 					<CollectionComponent clickHandler={this.albumClick} 
 						sidebar={this.state.showSidebar} />
