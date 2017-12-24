@@ -15,70 +15,94 @@ a {
   color: #00B7FF;
 }
 
-#title-box {
-	margin-left: 45px;
-	margin-bottom: 10px;
-	font: 20px "Permanent Marker", sans-serif;
+##title-background {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 98%;
+	height: 110px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+	background-color: #fffffb;
+	z-index: -100;
+	border-bottom: 2px solid #00B7FF;
 }
+
+#title-box {
+	overflow: hidden;
+	white-space: nowrap;
+	margin-left: 30px;
+	margin-top: -30px;
+	margin-bottom: 40px;
+	font: 6em "Permanent Marker", sans-serif;
+	color: white;
+	text-shadow: 3px 3px 1px grey;
+}
+
 #collection-container {
 	position: relative;
 	-background-color: rgba(100, 100, 100, 0.3);
 }
 
 #main {
-	width: auto;
+	-width: auto;
+}
+
+#collection, #collection > :first-child {
+	display: flex;
+	flex-direction: row;
+	flex-flow: row wrap;
 	justify-content: center;
 }
 
-#collection {
-	display: inline-flex;
-	flex-direction: row;
-	flex-flow: row wrap;
-	justify-content: flex-end;
-	background-color: grey;
-}
-
 .img-container {
-	-display: inline-block;
-	-margin: auto;
-	margin: 10px;
-	padding: 10px 10px 20px 10px;
+	margin: auto;
+	margin-bottom: 15px;
+	padding: 15px 10px 20px 10px;
 	overflow: hidden !important;
-	height: 285px;
+	height: 275px;
 	width: 250px;
 	color: #fff;
 	border-radius: 6px;
-	transition: all 0.2s ease, color 1ms;
+	transition: all 0.3s ease, color 1ms;
 }
 
 .img-container:hover {
 	-box-shadow: 0px 0px 40px blue;
 	background-color: rgba(100, 100, 100, 0.3);
-	color: #38c;
+	color: white;
 	font-size: 1em;
-	font-weight: 100;
-	transform: scale(1.01);
+	transform: scale(1.02);
+	text-shadow: 1px 1px 1px #38c;
 }
-
-
 
 .img-container span {
 	margin-top: 10px;
 	display: block;
 	text-align: center;
-	font-family: 'Permanent Marker', cursive;
+	font-family: "Permanent Marker", cursive;
+	-font-family: "Righteous" cursive;
 	font-size: 0.9em;
 }
 .thumb-img {
-	 height: 200px; 
-	 width: 200px;
-	 display: inline-block;
-	 padding: 10px;
-	 margin-left: 15px;
-	 margin-top: 15px;
-	 box-shadow: 0 0 5px #49e;
-	 -border-radius: 50%;
+	height: 220px; 
+	width: 220px;
+	display: inline-block;
+	padding: 0px;
+	margin-left: 15px;
+	margin-top: 15px;
+	box-shadow: 0px 0px 4px #49e;
+	border-radius: 1px;
+	-background-color: black;
+	transition: all 0.2s ease;
 }
+.img-container:hover .thumb-img {
+	padding: 0px;	
+	height:220px;
+	width:220px;
+	box-shadow: 0 0 8px #49f;
+}
+
 
 #sidebar {
 	padding: 10px;
@@ -93,10 +117,20 @@ a {
 	z-index: 1000;
 }
 
+.sidebar-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.icon-container {
+	margin-right: 5%;
+}
+
 .sidebar-image-icon {
-	height: 170px;
-	width: 170px;
-	margin: 11px 10px 20px 40px;
+	height: 180px;
+	width: 180px;
+	margin: 15px 10px 15px 45px;
 	border: 3px solid #fff;
 	box-shadow: 0 0 10px #111;
 	-border-radius: 50%;
@@ -109,20 +143,38 @@ a {
 	margin-top: 10px;
 	margin-bottom: 4px;
 }
+#sidebar h2, b {
+	margin: 5px 0px 10px 0px;
+	font-size: 1.6em;
+	min-width: 550px
+	white-space: nowrap;
+	overflow: scroll;
+}
 
 #sidebar h3 {
+	margin: 10px 0px 5px 0px;
 	text-shadow: 0 0 2px #111;
+	font-size: 1.7em;
 }
 
 #sidebar button {
 	position: absolute;
-	top: -5px;
-	left: 12px;
+	top: 5px;
+	left: 15px;
 	color: black;
+	border-radius: 35%;
 
 }
 
-#sidebar ul {
+.songs-container {
+	min-width: 300px;
+	width: 60%;	
+}
+
+.songs-container {
+}
+
+.songs ul {
 	margin-top: 5px;
 	list-style-type: none;
 	padding-left: 10px;
@@ -131,19 +183,23 @@ a {
 	column-count: 2;
 }
 
-#sidebar a {
+.songs a {
 	-color: black;
 	color: #ddd;
-	font-family: Helvetica;
+	font-family: "Righteous";
 	text-decoration: none;
 	font-size: .9em;
 }
 
-#sidebar a:hover {
-	-font-weight: bold;
+.songs a > span {
+	padding-top: 5px;
 }
 
-#sidebar li {
+.songs a:hover {
+	font-weight: bold;
+}
+
+.songs li {
 	height: 20px;
 	width: auto;
 	white-space: nowrap;
@@ -151,21 +207,24 @@ a {
 	transition: background-color 0.1s ease;
 }
 
-#sidebar li:hover {	
+.songs li:hover {	
 	background-color: #38c;
 	color: #fff;
 	text-shadow: 0px 0px 5px white;
 }
 
-#sidebar .songs {
+.songs {
 	position: absolute;
 	overflow: scroll;
-	height: 63px;
-	width: 560px;
+	height: 50%;
+	max-height: 150px;
+	width: 50%;
+	min-width: 400px;
+	
 }
 
-#sidebar iframe {
-	margin: -4px 0 0 20px;
+.sidebar-container iframe {
+	margin: 10px 30px 0 10px;
 	box-shadow: 0 0 5px #111;
 }
 
