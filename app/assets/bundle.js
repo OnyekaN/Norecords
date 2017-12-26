@@ -11063,7 +11063,7 @@ var CollectionComponent = function (_React$Component) {
 					}
 					return 0;
 				});
-				_this2.setState({ albums: albumsArray.slice(0, 400) });
+				_this2.setState({ albums: albumsArray /*.slice(0, 400)*/ });
 			});
 		}
 	}, {
