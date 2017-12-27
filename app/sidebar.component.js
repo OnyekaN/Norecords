@@ -37,13 +37,15 @@ class SidebarComponent extends React.Component {
 										</li> 
 										) :
 										(
-										<li key={obj.song_name}>{obj.song_name}</li> 
+										<li key={obj.song_name} style={{color:'#555', fontSize:'1em'}}>{obj.song_name}</li> 
 										)
 									)}
 							</ul>
 						</div>
 					</div>
+					<div className="iframe-container">
 						<iframe height="200px" width="200px" src="" frameBorder="0"  name="yt_iframe"></iframe>
+					</div>
 
 				</div>
 			</div>		

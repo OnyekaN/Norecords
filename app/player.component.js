@@ -1,6 +1,7 @@
 'use strict'
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import CollectionComponent from './collection.component';
 import SidebarComponent from './sidebar.component';
 
@@ -10,11 +11,28 @@ class PlayerComponent extends React.Component {
 
 		this.state = {
 			showSidebar: false,
-			album: undefined
+			album: undefined,
+			albums: undefined
 		}
 
 		this.albumClick = this.albumClick.bind(this);
 		this.closeSidebar = this.closeSidebar.bind(this);
+	}
+	
+	componentDidMount() {
+		axios.get('/api/sorted_albums/')
+			.then(res => {
+				const albums = res.data;	
+				const albumsArray = $.map(albums, (value, index) => {
+					return [value];
+				});	
+				albumsArray.sort((a,b) => {
+					if ( a.artist < b.artist ) { return -1}
+					if ( b.artist < a.artist ) { return 1}
+					return 0;
+				});
+				this.setState({albums: albumsArray});
+			});
 	}
 
 	albumClick(album) {
@@ -39,13 +57,14 @@ class PlayerComponent extends React.Component {
 
 	render() {
 		let album = this.state.album;
+		let collection = this.state.albums;
 		const sidebar = ( <SidebarComponent album={album} closeSidebar={this.closeSidebar}/> );
 		return (
 			<div>
 				{this.state.showSidebar ? sidebar : null} 
 				<div id="collection">
-					<CollectionComponent clickHandler={this.albumClick} 
-						sidebar={this.state.showSidebar} />
+					<CollectionComponent collection={this.state.albums} 
+						clickHandler={this.albumClick} sidebar={this.state.showSidebar} />
 				</div>
 			</div>
 		);

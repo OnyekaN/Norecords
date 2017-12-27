@@ -64,7 +64,7 @@ a {
 	width: 250px;
 	color: #fff;
 	border-radius: 6px;
-	transition: all 0.3s ease, color 1ms;
+	transition: all 0.3s ease, color 1ms, background-color 0.3s;
 }
 
 .img-container:hover {
@@ -80,8 +80,7 @@ a {
 	margin-top: 10px;
 	display: block;
 	text-align: center;
-	font-family: "Permanent Marker", cursive;
-	-font-family: "Righteous" cursive;
+	font-family: "Permanent Marker", sans-serif;
 	font-size: 0.9em;
 }
 .thumb-img {
@@ -108,12 +107,13 @@ a {
 	padding: 10px;
 	position: fixed;
 	bottom: 0; left: 0;
-	height: 210px;
+	height: 200px;
 	width: 100%;
 	float: left;
 	background-color: rgba(100, 100, 100, 0.6);
+	background: linear-gradient(to top, rgba(80, 80, 80, 0.6), transparent);
 	overflow: hide;
-	box-shadow: -5px 0 30px #111;
+	-box-shadow: -5px 0 10px #111;
 	z-index: 1000;
 }
 
@@ -130,18 +130,17 @@ a {
 .sidebar-image-icon {
 	height: 180px;
 	width: 180px;
-	margin: 15px 10px 15px 45px;
+	margin: 10px 10px 15px 45px;
 	border: 3px solid #fff;
-	box-shadow: 0 0 10px #111;
+	-box-shadow: 0 0 10px #111;
 	-border-radius: 50%;
+	-animation: rotation 4s infinite linear;
 }
 
 #sidebar h2, b {
 	-text-align: center;
 	color: #fff;
 	text-shadow: 0 0 3px #111;
-	margin-top: 10px;
-	margin-bottom: 4px;
 }
 #sidebar h2, b {
 	margin: 5px 0px 10px 0px;
@@ -159,12 +158,27 @@ a {
 
 #sidebar button {
 	position: absolute;
+	line-height: 18px;
 	top: 5px;
 	left: 15px;
-	color: black;
-	border-radius: 35%;
-
+	color: #444;
+	font-family: "Permanent Marker";
+	background-color: transparent;
+	border-radius: 2px;
+	border: 0 solid transparent;
+	text-shadow: 0px 0px 2px #111;
+	transition: background-color 0.5s ease;
 }
+
+#sidebar button:hover {
+	-color: #111;
+	text-shadow: 0px 0px 2px #555;
+	background-color: rgba(200, 200, 200, 0.2);
+}
+
+#sidebar button:focus {
+	outline: none;
+}	
 
 .songs-container {
 	min-width: 300px;
@@ -185,7 +199,7 @@ a {
 
 .songs a {
 	-color: black;
-	color: #ddd;
+	color: #eee;
 	font-family: "Righteous";
 	text-decoration: none;
 	font-size: .9em;
@@ -204,11 +218,15 @@ a {
 	width: auto;
 	white-space: nowrap;
 	-text-shadow: 0 0 1px #111;
-	transition: background-color 0.1s ease;
+	transition: background-color 0.4s ease;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
 
 .songs li:hover {	
-	background-color: #38c;
+	background-color: rgba(54, 128, 208, 1);
 	color: #fff;
 	text-shadow: 0px 0px 5px white;
 }
@@ -223,15 +241,28 @@ a {
 	
 }
 
-.sidebar-container iframe {
-	margin: 10px 30px 0 10px;
-	box-shadow: 0 0 5px #111;
+.iframe-container {
+	border-radius: 50%;
 }
 
+.iframe-container iframe {
+	margin: 2px 30px 0 10px;
+	-box-shadow: 0 0 2px #111;
+}
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
 .sidebar-play-button {
 	height: 20px;
 	width: 20px;
 	-display: none;
 	margin-right: 8px;
 }
+
 
