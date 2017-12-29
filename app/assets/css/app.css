@@ -36,7 +36,20 @@ a {
 	margin-bottom: 40px;
 	font: 6em "Permanent Marker", sans-serif;
 	color: white;
-	text-shadow: 3px 3px 1px grey;
+	text-shadow: 3px 3px 1px #666;
+}
+
+#search {
+	position: fixed;
+	top: 20px;
+	right: 5%;	
+	z-index: 500;
+}
+
+#search .search-bar {
+	border: 1px solid rgba(50, 50, 50, 0.3);
+	border-radius: 5px;
+	background-color: rgba(200, 200, 200, 0.2);
 }
 
 #collection-container {
@@ -44,11 +57,7 @@ a {
 	-background-color: rgba(100, 100, 100, 0.3);
 }
 
-#main {
-	-width: auto;
-}
-
-#collection, #collection > :first-child {
+#infinite-container {
 	display: flex;
 	flex-direction: row;
 	flex-flow: row wrap;
@@ -90,7 +99,7 @@ a {
 	padding: 0px;
 	margin-left: 15px;
 	margin-top: 15px;
-	box-shadow: 0px 0px 4px #49e;
+	box-shadow: 0px 0px 5px #33d6ff;
 	border-radius: 1px;
 	-background-color: black;
 	transition: all 0.2s ease;
@@ -99,7 +108,8 @@ a {
 	padding: 0px;	
 	height:220px;
 	width:220px;
-	box-shadow: 0 0 8px #49f;
+	box-shadow: 0px 0px 1px #49f;
+	-box-shadow: 0 0 8px #ffd700;
 }
 
 
@@ -111,7 +121,7 @@ a {
 	width: 100%;
 	float: left;
 	background-color: rgba(100, 100, 100, 0.6);
-	background: linear-gradient(to top, rgba(80, 80, 80, 0.6), transparent);
+	background: linear-gradient(to top, rgba(100, 100, 100, 0.6), transparent);
 	overflow: hide;
 	-box-shadow: -5px 0 10px #111;
 	z-index: 1000;
@@ -128,12 +138,12 @@ a {
 }
 
 .sidebar-image-icon {
-	height: 180px;
-	width: 180px;
-	margin: 10px 10px 15px 45px;
+	height: 190px;
+	width: 190px;
+	margin: 2px 10px 15px 45px;
 	border: 3px solid #fff;
 	-box-shadow: 0 0 10px #111;
-	-border-radius: 50%;
+	border-radius: 2%;
 	-animation: rotation 4s infinite linear;
 }
 
@@ -143,7 +153,7 @@ a {
 	text-shadow: 0 0 3px #111;
 }
 #sidebar h2, b {
-	margin: 5px 0px 10px 0px;
+	margin: 6px 0px 10px 0px;
 	font-size: 1.6em;
 	min-width: 550px
 	white-space: nowrap;
@@ -151,7 +161,7 @@ a {
 }
 
 #sidebar h3 {
-	margin: 10px 0px 5px 0px;
+	margin: 0px 0px 5px 0px;
 	text-shadow: 0 0 2px #111;
 	font-size: 1.7em;
 }
@@ -166,7 +176,7 @@ a {
 	background-color: transparent;
 	border-radius: 2px;
 	border: 0 solid transparent;
-	text-shadow: 0px 0px 2px #111;
+	text-shadow: 0px 0px 1px #ccc;
 	transition: background-color 0.5s ease;
 }
 
@@ -182,7 +192,7 @@ a {
 
 .songs-container {
 	min-width: 300px;
-	width: 60%;	
+	width: 65%;	
 }
 
 .songs-container {
@@ -206,7 +216,7 @@ a {
 }
 
 .songs a > span {
-	padding-top: 5px;
+	vertical-align: middle;
 }
 
 .songs a:hover {
@@ -214,7 +224,7 @@ a {
 }
 
 .songs li {
-	height: 20px;
+	height: 22px;
 	width: auto;
 	white-space: nowrap;
 	-text-shadow: 0 0 1px #111;
@@ -247,7 +257,7 @@ a {
 
 .iframe-container iframe {
 	margin: 2px 30px 0 10px;
-	-box-shadow: 0 0 2px #111;
+	box-shadow: 0 0 2px #111;
 }
 
 @-webkit-keyframes rotation {

@@ -1,23 +1,45 @@
 'use strict'
 import React from 'react';
 import ReactDOM from 'react-dom';
+import InfiniteScroll from 'react-infinite-scroller';
 
 class CollectionComponent extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			albums: this.props.collection,
+			albums: this.props.activeAlbums,
+			displayAlbums: [], 
+			hasMoreItems: true,
 			songs: []
 		}
+
+		this.loadItems.bind(this);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({albums: nextProps.activeAlbums});
 	}
 	
-	componentDidMount() {
+	loadItems(page) {
+		if ( this.state.albums ) {
+			let displayAlbums = this.state.displayAlbums,
+					initial = 2,
+					start = (page - initial) * 100,
+					end = (page - initial + 1) * 100;
+
+			if ( this.state.hasMoreItems ) {
+				displayAlbums = displayAlbums.concat(this.state.albums.slice(start, end));			
+				this.setState({displayAlbums: displayAlbums});
+				if ( end > this.state.albums.length )
+					this.setState({hasMoreItems: false}); return;
+			}	
+		}
 	}
 
 	render() {
-		let collection = !this.props.collection ? null :
-			( this.props.collection.map(obj => { return (
+		let collection = !this.state.displayAlbums ? null :
+			( this.state.displayAlbums.map(obj => { return (
 									<Album				
 										key={obj.name}
 										album={obj}
@@ -26,9 +48,15 @@ class CollectionComponent extends React.Component {
 								}) 
 			)
 		return (
-			<div>
-				{collection}
-			</div>
+			<InfiniteScroll
+				pageStart={0}
+				threshold={2000}
+				loadMore={this.loadItems.bind(this)}
+				hasMore={this.state.hasMoreItems}>
+				<div id="infinite-container">
+					{collection}
+				</div>
+			</InfiniteScroll>
 		);
 	}
 

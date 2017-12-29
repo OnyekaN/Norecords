@@ -57,13 +57,15 @@ class PlayerComponent extends React.Component {
 
 	render() {
 		let album = this.state.album;
-		let collection = this.state.albums;
 		const sidebar = ( <SidebarComponent album={album} closeSidebar={this.closeSidebar}/> );
 		return (
 			<div>
+				<div id="search">
+					<input className="search-bar" type="text"/>
+				</div>
 				{this.state.showSidebar ? sidebar : null} 
 				<div id="collection">
-					<CollectionComponent collection={this.state.albums} 
+					<CollectionComponent activeAlbums={this.state.albums} 
 						clickHandler={this.albumClick} sidebar={this.state.showSidebar} />
 				</div>
 			</div>
