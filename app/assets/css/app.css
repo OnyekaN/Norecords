@@ -159,9 +159,9 @@ a {
 #sidebar button {
 	position: absolute;
 	line-height: 18px;
-	top: 5px;
+	top: 10px;
 	left: 15px;
-	color: #222;
+	color: #555;
 	font-family: "Permanent Marker";
 	background-color: transparent;
 	border-radius: 2px;
