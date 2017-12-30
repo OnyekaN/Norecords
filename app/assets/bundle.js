@@ -11034,6 +11034,7 @@ module.exports = function spread(callback) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_infinite_scroller__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_infinite_scroller___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_infinite_scroller__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__album_component__ = __webpack_require__(220);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -11043,6 +11044,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -11063,7 +11065,7 @@ var CollectionComponent = function (_React$Component) {
 			songs: []
 		};
 
-		_this.loadItems.bind(_this);
+		_this.loadItems = _this.loadItems.bind(_this);
 		return _this;
 	}
 
@@ -11078,8 +11080,8 @@ var CollectionComponent = function (_React$Component) {
 			if (this.state.albums) {
 				var displayAlbums = this.state.displayAlbums,
 				    initial = 2,
-				    start = (page - initial) * 100,
-				    end = (page - initial + 1) * 100;
+				    start = (page - initial) * 50,
+				    end = (page - initial + 1) * 50;
 
 				if (this.state.hasMoreItems) {
 					displayAlbums = displayAlbums.concat(this.state.albums.slice(start, end));
@@ -11094,7 +11096,7 @@ var CollectionComponent = function (_React$Component) {
 			var _this2 = this;
 
 			var collection = !this.state.displayAlbums ? null : this.state.displayAlbums.map(function (obj) {
-				return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Album, {
+				return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__album_component__["a" /* default */], {
 					key: obj.name,
 					album: obj,
 					clickHandler: _this2.props.clickHandler
@@ -11105,7 +11107,7 @@ var CollectionComponent = function (_React$Component) {
 				{
 					pageStart: 0,
 					threshold: 2000,
-					loadMore: this.loadItems.bind(this),
+					loadMore: this.loadItems,
 					hasMore: this.state.hasMoreItems },
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'div',
@@ -11118,30 +11120,6 @@ var CollectionComponent = function (_React$Component) {
 
 	return CollectionComponent;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
-
-var Album = function Album(props) {
-	var handleClick = function handleClick() {
-		props.clickHandler(props.album);
-	};
-
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		{ className: 'img-container',
-			onClick: handleClick },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'thumb-img', src: props.album.art, alt: props.album.name }),
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'div',
-			null,
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'span',
-				null,
-				props.album.name,
-				' - ',
-				props.album.artist
-			)
-		)
-	);
-};
 
 /* harmony default export */ __webpack_exports__["a"] = (CollectionComponent);
 
@@ -11236,6 +11214,11 @@ var PlayerComponent = function (_React$Component) {
 			this.setState({
 				showSidebar: false
 			});
+		}
+	}, {
+		key: 'searchAlbums',
+		value: function searchAlbums() {
+			var foundAlbums = [];
 		}
 	}, {
 		key: 'render',
@@ -26677,6 +26660,77 @@ module.exports = g;
 
 module.exports = __webpack_require__(90);
 
+
+/***/ }),
+/* 220 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var AlbumComponent = function (_React$Component) {
+	_inherits(AlbumComponent, _React$Component);
+
+	function AlbumComponent(props) {
+		_classCallCheck(this, AlbumComponent);
+
+		var _this = _possibleConstructorReturn(this, (AlbumComponent.__proto__ || Object.getPrototypeOf(AlbumComponent)).call(this, props));
+
+		_this.state = {
+			album: _this.props.album
+		};
+
+		_this.handleClick = _this.handleClick.bind(_this);
+		return _this;
+	}
+
+	_createClass(AlbumComponent, [{
+		key: 'handleClick',
+		value: function handleClick() {
+			this.props.clickHandler(this.state.album);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{ className: 'img-container',
+					onClick: this.handleClick },
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'thumb-img', src: this.state.album.art, alt: this.state.album.name }),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					null,
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'span',
+						null,
+						this.state.album.name,
+						' - ',
+						this.state.album.artist
+					)
+				)
+			);
+		}
+	}]);
+
+	return AlbumComponent;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["a"] = (AlbumComponent);
 
 /***/ })
 /******/ ]);

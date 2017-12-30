@@ -49,10 +49,15 @@ class PlayerComponent extends React.Component {
 			});	
 		}
 	}
+
 	closeSidebar() {
 		this.setState({
 			showSidebar: false,
 		})
+	}
+
+	searchAlbums() {
+		let foundAlbums = [] 	
 	}
 
 	render() {

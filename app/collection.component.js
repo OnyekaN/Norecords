@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import InfiniteScroll from 'react-infinite-scroller';
+import AlbumComponent from './album.component';
 
 class CollectionComponent extends React.Component {
 	constructor(props) {
@@ -14,7 +15,7 @@ class CollectionComponent extends React.Component {
 			songs: []
 		}
 
-		this.loadItems.bind(this);
+		this.loadItems = this.loadItems.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -25,8 +26,8 @@ class CollectionComponent extends React.Component {
 		if ( this.state.albums ) {
 			let displayAlbums = this.state.displayAlbums,
 					initial = 2,
-					start = (page - initial) * 100,
-					end = (page - initial + 1) * 100;
+					start = (page - initial) * 50,
+					end = (page - initial + 1) * 50;
 
 			if ( this.state.hasMoreItems ) {
 				displayAlbums = displayAlbums.concat(this.state.albums.slice(start, end));			
@@ -40,7 +41,7 @@ class CollectionComponent extends React.Component {
 	render() {
 		let collection = !this.state.displayAlbums ? null :
 			( this.state.displayAlbums.map(obj => { return (
-									<Album				
+									<AlbumComponent
 										key={obj.name}
 										album={obj}
 										clickHandler={this.props.clickHandler}
@@ -51,7 +52,7 @@ class CollectionComponent extends React.Component {
 			<InfiniteScroll
 				pageStart={0}
 				threshold={2000}
-				loadMore={this.loadItems.bind(this)}
+				loadMore={this.loadItems}
 				hasMore={this.state.hasMoreItems}>
 				<div id="infinite-container">
 					{collection}
@@ -60,22 +61,6 @@ class CollectionComponent extends React.Component {
 		);
 	}
 
-}
-
-const Album = props => {
-	const handleClick = () => {
-		props.clickHandler(props.album)
-	}
-
-	return (	
-		<div className="img-container"
-		 onClick={handleClick}>
-			<img className="thumb-img" src={props.album.art} alt={props.album.name} />
-				<div>	
-					<span>{props.album.name} - {props.album.artist}</span>
-				</div>
-		</div>
-	)
 }
 
 export default CollectionComponent;

@@ -54,6 +54,7 @@ a {
 
 #collection-container {
 	position: relative;
+	overflow: auto;
 	-background-color: rgba(100, 100, 100, 0.3);
 }
 
@@ -122,7 +123,7 @@ a {
 	float: left;
 	background-color: rgba(100, 100, 100, 0.6);
 	background: linear-gradient(to top, rgba(100, 100, 100, 0.6), transparent);
-	overflow: hide;
+	overflow: hidden;
 	-box-shadow: -5px 0 10px #111;
 	z-index: 1000;
 }
@@ -134,15 +135,15 @@ a {
 }
 
 .icon-container {
-	margin-right: 5%;
+	margin-right: 3%;
 }
 
 .sidebar-image-icon {
 	height: 190px;
 	width: 190px;
-	margin: 2px 10px 15px 45px;
+	margin: 3px 10px 15px 45px;
 	border: 3px solid #fff;
-	-box-shadow: 0 0 10px #111;
+	box-shadow: 0 0 10px #111;
 	border-radius: 2%;
 	-animation: rotation 4s infinite linear;
 }
@@ -201,7 +202,7 @@ a {
 .songs ul {
 	margin-top: 5px;
 	list-style-type: none;
-	padding-left: 10px;
+	padding-left: 0px;
 	-webkit-column-count: 2;
 	-moz-column-count: 2;
 	column-count: 2;
