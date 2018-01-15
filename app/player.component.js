@@ -12,26 +12,35 @@ class PlayerComponent extends React.Component {
 		this.state = {
 			showSidebar: false,
 			album: undefined,
-			albums: undefined
+			allAlbums: undefined,
+			activeAlbums: undefined,
+			keywords: []
 		}
 
 		this.albumClick = this.albumClick.bind(this);
 		this.closeSidebar = this.closeSidebar.bind(this);
+		this.searchAlbums = this.searchAlbums.bind(this);
 	}
-	
+
 	componentDidMount() {
 		axios.get('/api/sorted_albums/')
 			.then(res => {
-				const albums = res.data;	
-				const albumsArray = $.map(albums, (value, index) => {
+				let albums = res.data,
+						albumsArray = $.map(albums, (value, index) => {
 					return [value];
-				});	
+				});
 				albumsArray.sort((a,b) => {
 					if ( a.artist < b.artist ) { return -1}
 					if ( b.artist < a.artist ) { return 1}
 					return 0;
 				});
-				this.setState({albums: albumsArray});
+				let keywordsArray = [];
+				albumsArray.forEach(album => {
+					let string = `${album.name} ${album.artist}`
+					keywordsArray.push(string.toLowerCase());
+				});
+				this.setState({allAlbums: albumsArray, activeAlbums: albumsArray});
+				this.setState({keywords: keywordsArray});
 			});
 	}
 
@@ -42,11 +51,11 @@ class PlayerComponent extends React.Component {
 				album: album
 			});
 		}
-		else { 
+		else {
 			this.setState({
 				showSidebar: true,
 				album: album
-			});	
+			});
 		}
 	}
 
@@ -56,8 +65,25 @@ class PlayerComponent extends React.Component {
 		})
 	}
 
-	searchAlbums() {
-		let foundAlbums = [] 	
+	searchAlbums(e) {
+		if ( e.key === 'Enter') {
+			let matchAlbums = [],
+					text = e.target.value.toLowerCase(),
+					searchTerms = text.split(' ');
+			for ( let i = 0 ; i < this.state.allAlbums.length ; i++ ) {
+				let match = true;
+				searchTerms.forEach(searchTerm => {
+					if ( this.state.keywords[i].indexOf(searchTerm) == -1 )
+						match = false;
+				});
+				match ? matchAlbums.push(this.state.allAlbums[i]) : null;
+			}
+			if ( matchAlbums.length )
+				this.setState({activeAlbums: matchAlbums});
+			else
+				this.setState({activeAlbums: this.state.allAlbums});
+
+		}
 	}
 
 	render() {
@@ -66,12 +92,12 @@ class PlayerComponent extends React.Component {
 		return (
 			<div>
 				<div id="search">
-					<input className="search-bar" type="text"/>
+					<input className="search-bar" type="text" onKeyPress={this.searchAlbums}/>
 				</div>
-				{this.state.showSidebar ? sidebar : null} 
+				{this.state.showSidebar ? sidebar : null}
 				<div id="collection">
-					<CollectionComponent activeAlbums={this.state.albums} 
-						clickHandler={this.albumClick} sidebar={this.state.showSidebar} />
+					<CollectionComponent activeAlbums={this.state.activeAlbums}
+						clickHandler={this.albumClick} />
 				</div>
 			</div>
 		);
