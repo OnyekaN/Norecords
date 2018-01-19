@@ -12,25 +12,44 @@ class CollectionComponent extends React.Component {
 			activeAlbums: this.props.activeAlbums,
 			loadedAlbums: [],
 			hasMoreItems: true,
-			//songs: []
+			page: 1,
 		}
 		this.loadItems = this.loadItems.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({activeAlbums: nextProps.activeAlbums, loadedAlbums: nextProps.activeAlbums});
+		let loaded = undefined;
+		if ( nextProps.activeAlbums.length < 50 ) {
+			this.setState({hasMoreItems: false});
+			loaded = nextProps.activeAlbums;
+		} else {
+			loaded = nextProps.activeAlbums.slice(0, 50);
+			this.setState({hasMoreItems: true, page: 1});
+		}
+		this.setState({activeAlbums: nextProps.activeAlbums, loadedAlbums: loaded});
 	}
 
-	loadItems(page) {
+	shouldComponentUpdate(nextProps) {
+		if ( typeof nextProps.update === 'undefined' )
+			return true
+		else return ( nextProps.update )
+	}
+
+	loadItems(cycle) {
 		if ( this.state.activeAlbums ) {
+			this.setState({page: this.state.page + 1});
 			let loadedAlbums = this.state.loadedAlbums,
+					page = this.state.page,
 					initial = 2,
 					start = (page - initial) * 50,
 					end = (page - initial + 1) * 50;
 
 			if ( this.state.hasMoreItems ) {
-				loadedAlbums = loadedAlbums.concat(this.state.activeAlbums.slice(start, end));
+				if ( !!start ) {
+					loadedAlbums = loadedAlbums.concat(this.state.activeAlbums.slice(start, end));
+				}
 				this.setState({loadedAlbums: loadedAlbums});
+				this.forceUpdate()
 				if ( end > this.state.activeAlbums.length )
 					this.setState({hasMoreItems: false}); return;
 			}
@@ -38,11 +57,10 @@ class CollectionComponent extends React.Component {
 	}
 
 	render() {
-		console.log(this.state)
-		let collection = !this.state.loadedAlbums ? null :
+		let collection = !this.state.activeAlbums ? null :
 			( this.state.loadedAlbums.map(obj => { return (
 									<AlbumComponent
-										key={obj.name}
+										key={Math.random()}
 										album={obj}
 										clickHandler={this.props.clickHandler}
 									/> )

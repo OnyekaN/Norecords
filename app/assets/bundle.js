@@ -11132,7 +11132,8 @@ var CollectionComponent = function (_React$Component) {
 		_this.state = {
 			activeAlbums: _this.props.activeAlbums,
 			loadedAlbums: [],
-			hasMoreItems: true
+			hasMoreItems: true,
+			page: 1
 		};
 		_this.loadItems = _this.loadItems.bind(_this);
 		return _this;
@@ -11141,20 +11142,38 @@ var CollectionComponent = function (_React$Component) {
 	_createClass(CollectionComponent, [{
 		key: 'componentWillReceiveProps',
 		value: function componentWillReceiveProps(nextProps) {
-			this.setState({ activeAlbums: nextProps.activeAlbums, loadedAlbums: nextProps.activeAlbums });
+			var loaded = undefined;
+			if (nextProps.activeAlbums.length < 50) {
+				this.setState({ hasMoreItems: false });
+				loaded = nextProps.activeAlbums;
+			} else {
+				loaded = nextProps.activeAlbums.slice(0, 50);
+				this.setState({ hasMoreItems: true, page: 1 });
+			}
+			this.setState({ activeAlbums: nextProps.activeAlbums, loadedAlbums: loaded });
+		}
+	}, {
+		key: 'shouldComponentUpdate',
+		value: function shouldComponentUpdate(nextProps) {
+			if (typeof nextProps.update === 'undefined') return true;else return nextProps.update;
 		}
 	}, {
 		key: 'loadItems',
-		value: function loadItems(page) {
+		value: function loadItems(cycle) {
 			if (this.state.activeAlbums) {
+				this.setState({ page: this.state.page + 1 });
 				var loadedAlbums = this.state.loadedAlbums,
+				    page = this.state.page,
 				    initial = 2,
 				    start = (page - initial) * 50,
 				    end = (page - initial + 1) * 50;
 
 				if (this.state.hasMoreItems) {
-					loadedAlbums = loadedAlbums.concat(this.state.activeAlbums.slice(start, end));
+					if (!!start) {
+						loadedAlbums = loadedAlbums.concat(this.state.activeAlbums.slice(start, end));
+					}
 					this.setState({ loadedAlbums: loadedAlbums });
+					this.forceUpdate();
 					if (end > this.state.activeAlbums.length) this.setState({ hasMoreItems: false });return;
 				}
 			}
@@ -11164,10 +11183,9 @@ var CollectionComponent = function (_React$Component) {
 		value: function render() {
 			var _this2 = this;
 
-			console.log(this.state);
-			var collection = !this.state.loadedAlbums ? null : this.state.loadedAlbums.map(function (obj) {
+			var collection = !this.state.activeAlbums ? null : this.state.loadedAlbums.map(function (obj) {
 				return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__album_component__["a" /* default */], {
-					key: obj.name,
+					key: Math.random(),
 					album: obj,
 					clickHandler: _this2.props.clickHandler
 				});
@@ -11231,11 +11249,13 @@ var PlayerComponent = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (PlayerComponent.__proto__ || Object.getPrototypeOf(PlayerComponent)).call(this, props));
 
 		_this.state = {
+			updateColl: true,
 			showSidebar: false,
 			album: undefined,
 			allAlbums: undefined,
 			activeAlbums: undefined,
-			keywords: []
+			keywords: [],
+			noMatch: false
 		};
 
 		_this.albumClick = _this.albumClick.bind(_this);
@@ -11271,6 +11291,8 @@ var PlayerComponent = function (_React$Component) {
 				_this2.setState({ allAlbums: albumsArray, activeAlbums: albumsArray });
 				_this2.setState({ keywords: keywordsArray });
 			});
+
+			//window.addEventListener('scroll', this.handleScroll);
 		}
 	}, {
 		key: 'albumClick',
@@ -11278,12 +11300,14 @@ var PlayerComponent = function (_React$Component) {
 			if (album == this.state.album) {
 				this.setState({
 					showSidebar: !this.state.showSidebar,
-					album: album
+					album: album,
+					updateColl: false
 				});
 			} else {
 				this.setState({
 					showSidebar: true,
-					album: album
+					album: album,
+					updateColl: false
 				});
 			}
 		}
@@ -11291,7 +11315,8 @@ var PlayerComponent = function (_React$Component) {
 		key: 'closeSidebar',
 		value: function closeSidebar() {
 			this.setState({
-				showSidebar: false
+				showSidebar: false,
+				updateColl: false
 			});
 		}
 	}, {
@@ -11301,8 +11326,8 @@ var PlayerComponent = function (_React$Component) {
 
 			if (e.key === 'Enter') {
 				var matchAlbums = [],
-				    text = e.target.value.toLowerCase(),
-				    searchTerms = text.split(' ');
+				    searchText = e.target.value.toLowerCase(),
+				    searchTerms = searchText.split(' ');
 
 				var _loop = function _loop(i) {
 					var match = true;
@@ -11315,28 +11340,45 @@ var PlayerComponent = function (_React$Component) {
 				for (var i = 0; i < this.state.allAlbums.length; i++) {
 					_loop(i);
 				}
-				if (matchAlbums.length) this.setState({ activeAlbums: matchAlbums });else this.setState({ activeAlbums: this.state.allAlbums });
+
+				if (matchAlbums.length) this.setState({ activeAlbums: matchAlbums, noMatch: false, updateColl: true });else this.setState({ activeAlbums: [], noMatch: true, updateColl: true });
 			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
 			var album = this.state.album;
-			var sidebar = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__sidebar_component__["a" /* default */], { album: album, closeSidebar: this.closeSidebar });
+			var sidebar = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__sidebar_component__["a" /* default */], { album: album, closeSidebar: this.closeSidebar }),
+			    noMatchWarning = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'h2',
+				null,
+				'no matching albums...'
+			);
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				null,
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'div',
-					{ id: 'search' },
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { className: 'search-bar', type: 'text', onKeyPress: this.searchAlbums })
+					{ id: 'search-box' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'search-container' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'span',
+							{ className: 'search-icon' },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-search' })
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { id: 'search', type: 'text',
+							placeholder: 'Search...', onKeyPress: this.searchAlbums })
+					)
 				),
 				this.state.showSidebar ? sidebar : null,
+				this.state.noMatch ? noMatchWarning : null,
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'div',
 					{ id: 'collection' },
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__collection_component__["a" /* default */], { activeAlbums: this.state.activeAlbums,
-						clickHandler: this.albumClick })
+						clickHandler: this.albumClick, update: this.state.updateColl })
 				)
 			);
 		}
