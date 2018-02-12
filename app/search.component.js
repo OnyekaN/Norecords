@@ -1,7 +1,6 @@
 'use strict'
 import React from 'react'
 import ReacDOM from 'react-dom'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class SearchComponent extends React.Component {
 
@@ -9,48 +8,62 @@ class SearchComponent extends React.Component {
 		super(props)
 
 		this.state = {
-			searchText: null,
+			show: "",
+			search: null,
 		}
 
 		this.handleSearch = this.handleSearch.bind(this);
+		this.clearSearch = this.clearSearch.bind(this);
+	}
+
+	componentWillMount() {
+		setTimeout(() => {
+			this.setState({show: "show"})
+		}, 30);
 	}
 
 	handleSearch(e) {
+		if ( !e ) {
+			this.props.searchHandler("");
+			this.setState({search: null});
+			return;
+		}
+
 		if ( e.key === 'Enter' ) {
 			let searchText = e.target.value.toLowerCase();
 			this.props.searchHandler(searchText);
-			this.setState({searchText: searchText});
+			this.setState({search: !!searchText});
 		}
 	}
 
+	clearSearch() {
+		this.handleSearch("");
+		this.setState({search: null});
+		document.getElementsByClassName("search-input").value= "";
+	}
+
 	render() {
-		const searchStatus = (
-								<div className='search-display'>
-									<span className='search-clear'><i className="far fa-times-circle"/></span>
-									<span>{this.state.searchText}</span>
+		const clearSearchButton = (
+													<span className="search-clear" onClick={this.clearSearch}>
+														<i className="far fa-times-circle fa-lg"/>
+													</span> );
+
+		const searchInfo = (
+								<div className="search-info">
+									<span className="search-clear"><i className="far fa-times-circle"/></span>
+									<span>{this.state.search}</span>
 								</div>
 							);
 
 		return (
-			<div>
-				<ReactCSSTransitionGroup
-					transitionName="search"
-					transitionAppear={true}
-					transitionAppearTimeout={500}
-					transitionEnter={false}
-					transitionLeave={false}>
+			<div className={"search-box " + this.state.show} key="search-box">
+				{this.state.search ? clearSearchButton : null}
+				<div className="search-container">
+					<span className="search-icon"><i className="fa fa-search"/></span>
+					<input className="search-input" type="text"
+						placeholder="Search..." onKeyPress={this.handleSearch}/>
+				</div>
 
-					<div className="search-box" key="search-box">
-						<div className="search-container">
-							<span className="search-icon"><i className="fa fa-search"/></span>
-							<input id="search" type="text"
-								placeholder="Search..." onKeyPress={this.handleSearch}/>
-						</div>
-					</div>
-
-				</ReactCSSTransitionGroup>
-
-			{this.state.searchText ? searchStatus : null}
 
 			</div>
 		);

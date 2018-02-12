@@ -34,7 +34,7 @@ class SidebarComponent extends React.Component {
 													target="yt_iframe">
 												<img className="sidebar-play-button" src="images/play-button.png" style={{verticalAlign: 'middle'}} alt="play button"/><span>{obj.song_name}</span>
 											</a>
-										</li> 
+										</li>
 										) :
 										(
 										<li key={obj.song_name} style={{color:'#555', fontSize:'1em'}}>{obj.song_name}</li> 

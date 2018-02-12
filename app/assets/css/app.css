@@ -23,8 +23,8 @@ a {
 	margin-bottom: 40px;
 	font: 6em "Permanent Marker", sans-serif;
 	color: white;
-	text-shadow: 3px 3px 0px #add8e6;
-	-animation: glow-shadow 10s 0.5s infinite;
+	text-shadow: 3px 3px 0px #444;
+	-animation: dark-shadow 10s 0.5s infinite;
 }
 
 @keyframes glow-shadow {
@@ -33,17 +33,36 @@ a {
 	50% { text-shadow: 3px 3px 0px #48cff2; }
 	75% { text-shadow: 3px 3px 0px #21fb33; }
 	100% { text-shadow: 3px 3px 0px #add8e6; }
+}
+
+@keyframes dark-shadow {
+	0% { text-shadow: 3px 3px 0px #111; }
+	50% { text-shadow: 3px 3px 0px #444; }
+	100% { text-shadow: 3px 3px 0px #111; }
 
 }
+
+
 
 .search-box {
 	background-color:;
 	position: fixed;
 	top: 20px;
 	right: 2%;
-	height: 30px;
+	height: 100px;
 	z-index: 500;
 	width: 20%;
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.search-box.show {
+	opacity: 1;
+	visibility: visible;
 }
 
 .search-appear {
@@ -60,7 +79,7 @@ a {
 	height: 30px;
 }
 
-.search-container #search {
+.search-container .search-input {
 	float: left;
 	border: 1px solid rgba(50, 50, 50, 0);
 	border-radius: 3px;
@@ -82,53 +101,47 @@ a {
 	color: #4f5b66;
 }
 
-#search::-webkit-input-placeholder {
+.search-input::-webkit-input-placeholder{
 	color: rgba(255, 255, 255, 0.6) !important;
 }
-#search::-moz-input-placeholder {
+.search-input::-moz-input-placeholder {
 	color: rgba(255, 255, 255, 0.6) !important;
 }
-#search::-ms-input-placeholder {
+.search-input::-ms-input-placeholder {
 	color: rgba(255, 255, 255, 0.6) !important;
 }
 
-.search-container #search:hover, #search:focus, #search:active {
+.search-container .search-input:hover, .search-input:focus, .search-input:active {
 	outline: none;
 	background: rgba(255, 255, 255, 0.9);
 	color: black;
 }
 
-#search:hover::-webkit-input-placeholder, #search:focus::-webkit-input-placeholder  {
+.search-input:hover::-webkit-input-placeholder, .search-input:focus::-webkit-input-placeholder  {
 	color: #333 !important;
 }
 
-#search:hover::-ms-input-placeholder, #search:focus::-ms-input-placeholder {
+.search-input:hover::-ms-input-placeholder, .search-input:focus::-ms-input-placeholder {
 	color: #333 !important;
 }
 
-#search:hover::-moz-input-placeholder, #search:focus::-moz-input-placeholder {
+.search-input:hover::-moz-input-placeholder, .search-input:focus::-moz-input-placeholder {
 	color: #333 !important;
 }
 
 
-.search-display {
-	position: relative;
-	display: inline-block;
-	min-width:  400px;
-	margin: 0 0 15px 40px;
+.search-clear {
+	position: absolute;
+	top: 10px;
+	right: 30px;
+	color: #333;
+	transition: .3s ease;
+	z-index: 1000;
+	cursor: pointer;
 }
 
-.search-display .search-clear {
-	height: 40px;
-	width: 40px;
-	margin: 10px;
+.search-clear:hover {
 	color: rgb(0, 183, 255);
-
-}
-
-.search-display span {
-	font-size: 1.4em;
-	font-weight: bold;
 }
 
 #collection-container {

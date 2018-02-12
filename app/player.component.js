@@ -17,7 +17,6 @@ class PlayerComponent extends React.Component {
 			allAlbums: undefined,
 			activeAlbums: undefined,
 			keywords: [],
-			noMatch: false
 		}
 
 		this.albumClick = this.albumClick.bind(this);
@@ -73,6 +72,12 @@ class PlayerComponent extends React.Component {
 	}
 
 	searchAlbums(text) {
+
+		if ( !text ) {
+			this.setState({activeAlbums: this.state.allAlbums, updateColl: true}); 
+			return;
+		}
+
 		let matchAlbums = [],
 				searchText = text.toLowerCase(),
 				searchTerms = searchText.split(' ');
@@ -86,8 +91,7 @@ class PlayerComponent extends React.Component {
 			match ? matchAlbums.push(this.state.allAlbums[i]) : null;
 
 			if ( matchAlbums.length ) {
-				this.setState({activeAlbums: matchAlbums, noMatch: false, updateColl: true, search: searchText});
-				console.log(window.pageYOffset);
+				this.setState({activeAlbums: matchAlbums, updateColl: true});
 				if ( window.pageYOffset > 120 ) {
 					window.scrollTo(0, 120);
 				}

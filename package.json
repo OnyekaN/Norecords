@@ -19,10 +19,8 @@
     "nodemon": "^1.11.0",
     "pg": "^6.2.2",
     "react": "^15.4.2",
-    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^15.4.2",
     "react-infinite-scroller": "^1.1.2",
-    "react-transition-group": "^1.2.1",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
