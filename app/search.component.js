@@ -39,7 +39,7 @@ class SearchComponent extends React.Component {
 	clearSearch() {
 		this.handleSearch("");
 		this.setState({search: null});
-		document.getElementsByClassName("search-input").value= "";
+		document.getElementsByClassName("search-input")[0].value = "";
 	}
 
 	render() {

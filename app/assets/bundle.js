@@ -26871,7 +26871,7 @@ var SearchComponent = function (_React$Component) {
 		value: function clearSearch() {
 			this.handleSearch("");
 			this.setState({ search: null });
-			document.getElementsByClassName("search-input").value = "";
+			document.getElementsByClassName("search-input")[0].value = "";
 		}
 	}, {
 		key: 'render',
