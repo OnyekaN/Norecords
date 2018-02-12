@@ -29,7 +29,7 @@ router.get('/api/songs', (req, res, next) => {
 		query.on('end', () => {
 			done();
 			return res.json(results);
-		});	
+		});
 	});
 });
 
@@ -43,11 +43,11 @@ router.get('/api/albums', (req, res, next) => {
 			console.log(err);
 			return res.status.json(500).json({success: false, data: err});
 		}
-		
+
 		querySQL = `SELECT album FROM songs
 								GROUP BY album
 								ORDER BY album DESC; `
-			
+
 		const query = client.query(querySQL);
 
 		query.on('row', (row) => {
@@ -59,8 +59,8 @@ router.get('/api/albums', (req, res, next) => {
 			return res.json(results);
 		});
 	});
-	
-});		
+
+});
 
 /* param for one album */
 router.param('album', (req, res, next, id) => {
@@ -97,15 +97,15 @@ router.get('/api/albums/:album', (req, res, next) => {
 });
 
 router.get('/api/sorted_albums', (req, res, next) => {
-	const results = [];	
-	
+	const results = [];
+
 	pg.connect(connectionString, (err, client, done) => {
 		if (err) {
 			done();
 			console.log(err);
 			return res.status(500).json({success: false, data: err});
 		}
-		
+
 		const query = client.query('SELECT * FROM songs ORDER BY album DESC;')
 
 		query.on('row', (row) => {
@@ -120,23 +120,23 @@ router.get('/api/sorted_albums', (req, res, next) => {
 			let albumName = "";
 			songs.map(obj => {
 				if ( albumName == "" ) { albumName = obj.album };
+
 				if ( albumName == obj.album ) { album.push(obj) };
-				if ( obj.artwork_path == "N/A" ) { return }
+
 				if ( albumName != obj.album ) {
 					albums[albumName] = {};
 					albums[albumName].name = albumName;
 					albums[albumName].artist = album[0].artist;
+					albums[albumName].art = album[0].artwork_path;
+					albums[albumName].genre = album[0].genre;
+					albums[albumName].year = album[0].year;
 					albums[albumName].songs = album;
-					if ( album[0].artwork_path == "N/A") {
-						albums[albumName].art = "/images/not_available.png";
-					} else { 
-						albums[albumName].art = album[0].artwork_path;
-					}
 					albumName = obj.album;
 					album = []
 					album.push(obj);
 				}
 			});
+
 			return res.json(albums);
 
 		})

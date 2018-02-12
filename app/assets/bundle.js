@@ -11286,7 +11286,7 @@ var PlayerComponent = function (_React$Component) {
 				});
 				var keywordsArray = [];
 				albumsArray.forEach(function (album) {
-					var string = album.name + ' ' + album.artist;
+					var string = album.name + ' ' + album.artist + ' ' + album.genre + ' ' + album.year;
 					keywordsArray.push(string.toLowerCase());
 				});
 				_this2.setState({ allAlbums: albumsArray, activeAlbums: albumsArray });
@@ -11412,10 +11412,16 @@ var SidebarComponent = function (_React$Component) {
 	_createClass(SidebarComponent, [{
 		key: 'render',
 		value: function render() {
-			var album = this.props.album;
+			var album = this.props.album,
+			    yearGenre = [];
+			if (album.genre) yearGenre.push(album.genre);
+			if (album.year) yearGenre.push(album.year);
+			yearGenre = yearGenre.join(" · ");
+
 			album.songs.sort(function (a, b) {
 				return a.song_id - b.song_id;
 			});
+
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				{ id: 'sidebar', className: '' },
@@ -11448,6 +11454,11 @@ var SidebarComponent = function (_React$Component) {
 								null,
 								album.name
 							)
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'h4',
+							null,
+							yearGenre
 						),
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							'div',

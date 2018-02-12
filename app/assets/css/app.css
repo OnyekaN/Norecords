@@ -246,7 +246,7 @@ a {
 	color: #fff;
 	text-shadow: 0 0 3px #111;
 	height: 34px;
-	margin: 5px 0px 10px 0px;
+	margin: 5px 0px 4px 0px;
 	font-size: 1.5em;
 	max-width: 100%;
 	white-space: nowrap;
@@ -258,6 +258,16 @@ a {
 	text-shadow: 0 0 2px #111;
 	font-size: 1.7em;
 }
+
+#sidebar h4 {
+	position: relative;
+	font-family: "Helvetica";
+	font-size: 0.9em;
+	color: #398bdb;
+	margin: 0px 0px 7px 2px;
+	text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
 
 #sidebar button {
 	position: absolute;

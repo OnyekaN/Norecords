@@ -10,10 +10,16 @@ class SidebarComponent extends React.Component {
 	}
 
 	render() {
-		let album = this.props.album;
+		let album = this.props.album,
+				yearGenre = [];
+		if ( album.genre ) yearGenre.push(album.genre);
+		if ( album.year ) yearGenre.push(album.year);
+		yearGenre = yearGenre.join(" · ");
+
 		album.songs.sort(function (a, b) {
 			return a.song_id - b.song_id;
 		});
+
 		return (
 			<div id="sidebar" className="">
 				<div className="sidebar-container">
@@ -24,6 +30,7 @@ class SidebarComponent extends React.Component {
 					<div className="songs-container">
 						<h3>{album.artist}</h3>
 						<h2><b>{album.name}</b></h2>
+						<h4>{yearGenre}</h4>
 						<div className="songs">
 							<ul>
 								{album.songs.map(obj =>

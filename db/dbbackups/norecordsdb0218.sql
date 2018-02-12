@@ -476,12 +476,6 @@ COPY songs (song_id, song_name, artist, album, genre, year, youtube_link, artwor
 392	07 How Can You Mend a Broken Heart	Al Green	Let's Stay Together	Soul	1971	https://youtube.com/embed/UgAFcvIw8J4?autoplay=1	/images/album art/Al Green - Let's Stay Together.jpg
 393	08 Judy	Al Green	Let's Stay Together	Soul	1971	https://youtube.com/embed/gKTgXNAXUwc?autoplay=1	/images/album art/Al Green - Let's Stay Together.jpg
 394	09 It Ain't No Fun to Me	Al Green	Let's Stay Together	Soul	1971	https://youtube.com/embed/lZgOYxUnCJY?autoplay=1	/images/album art/Al Green - Let's Stay Together.jpg
-395	13 Alan Watts - Buddhism (13 of 18)	Alan Watts	Buddhism, Religion of no Religion	Taped Lectures	1996	https://youtube.com/embed/-VYnfnBCVQU?autoplay=1	/images/album art/Alan Watts - Buddhism, Religion of no Religion.jpg
-396	14 Alan Watts - Buddhism (14 of 18)	Alan Watts	Buddhism, Religion of no Religion	Taped Lectures	1996	https://youtube.com/embed/WmIlHih0UKM?autoplay=1	/images/album art/Alan Watts - Buddhism, Religion of no Religion.jpg
-397	15 Alan Watts - Buddhism (15 of 18)	Alan Watts	Buddhism, Religion of no Religion	Taped Lectures	1996	https://youtube.com/embed/WmIlHih0UKM?autoplay=1	/images/album art/Alan Watts - Buddhism, Religion of no Religion.jpg
-398	16 Alan Watts - Buddhism (16 of 18)	Alan Watts	Buddhism, Religion of no Religion	Taped Lectures	1996	https://youtube.com/embed/1PFxAiVwfis?autoplay=1	/images/album art/Alan Watts - Buddhism, Religion of no Religion.jpg
-399	17 Alan Watts - Buddhism (17 of 18)	Alan Watts	Buddhism, Religion of no Religion	Taped Lectures	1996	https://youtube.com/embed/WmIlHih0UKM?autoplay=1	/images/album art/Alan Watts - Buddhism, Religion of no Religion.jpg
-400	18 Alan Watts - Buddhism (18 of 18)	Alan Watts	Buddhism, Religion of no Religion	Taped Lectures	1996	https://youtube.com/embed/IqDFGNEoEWw?autoplay=1	/images/album art/Alan Watts - Buddhism, Religion of no Religion.jpg
 401	01 Don's Dawn	Albert Ayler	New York Eye and Ear Control	Free Jazz	1964	https://youtube.com/embed/-ybGjX8SdBU?autoplay=1	/images/album art/Albert Ayler - New York Eye and Ear Control.jpg
 402	02 AY	Albert Ayler	New York Eye and Ear Control	Free Jazz	1964	https://youtube.com/embed/88y8B1_TZQc?autoplay=1	/images/album art/Albert Ayler - New York Eye and Ear Control.jpg
 403	03 ITT	Albert Ayler	New York Eye and Ear Control	Free Jazz	1964	https://youtube.com/embed/GoKV9hfSBGc?autoplay=1	/images/album art/Albert Ayler - New York Eye and Ear Control.jpg

@@ -38,7 +38,7 @@ class PlayerComponent extends React.Component {
 				});
 				let keywordsArray = [];
 				albumsArray.forEach(album => {
-					let string = `${album.name} ${album.artist}`
+					let string = `${album.name} ${album.artist} ${album.genre} ${album.year}`
 					keywordsArray.push(string.toLowerCase());
 				});
 				this.setState({allAlbums: albumsArray, activeAlbums: albumsArray});
