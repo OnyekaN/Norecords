@@ -2,8 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import CollectionComponent from './collection.component';
+import SearchComponent from './search.component';
 import SidebarComponent from './sidebar.component';
+import CollectionComponent from './collection.component';
 
 class PlayerComponent extends React.Component {
 	constructor(props) {
@@ -45,7 +46,6 @@ class PlayerComponent extends React.Component {
 				this.setState({keywords: keywordsArray});
 			});
 
-		//window.addEventListener('scroll', this.handleScroll);
 	}
 
 	albumClick(album) {
@@ -72,47 +72,43 @@ class PlayerComponent extends React.Component {
 		})
 	}
 
-	searchAlbums(e) {
-		if ( e.key === 'Enter') {
-			let matchAlbums = [],
-					searchText = e.target.value.toLowerCase(),
-					searchTerms = searchText.split(' ');
+	searchAlbums(text) {
+		let matchAlbums = [],
+				searchText = text.toLowerCase(),
+				searchTerms = searchText.split(' ');
 
-			for ( let i = 0 ; i < this.state.allAlbums.length ; i++ ) {
-				let match = true;
-				searchTerms.forEach(searchTerm => {
-					if ( this.state.keywords[i].indexOf(searchTerm) == -1 )
-						match = false;
-				});
-				match ? matchAlbums.push(this.state.allAlbums[i]) : null;
+		for ( let i = 0 ; i < this.state.allAlbums.length ; i++ ) {
+			let match = true;
+			searchTerms.forEach(searchTerm => {
+				if ( this.state.keywords[i].indexOf(searchTerm) == -1 )
+					match = false;
+			});
+			match ? matchAlbums.push(this.state.allAlbums[i]) : null;
+
+			if ( matchAlbums.length ) {
+				this.setState({activeAlbums: matchAlbums, noMatch: false, updateColl: true, search: searchText});
+				console.log(window.pageYOffset);
+				if ( window.pageYOffset > 120 ) {
+					window.scrollTo(0, 120);
+				}
 			}
-
-			if ( matchAlbums.length )
-				this.setState({activeAlbums: matchAlbums, noMatch: false, updateColl: true});
-			else this.setState({activeAlbums: [], noMatch: true, updateColl: true});
-
+			else this.setState({activeAlbums: [], updateColl: true});
 		}
 	}
 
 	render() {
 		let album = this.state.album;
-		const sidebar = ( <SidebarComponent album={album} closeSidebar={this.closeSidebar}/> ),
-					noMatchWarning = ( <h2>no matching albums...</h2> );
-		return (
-			<div>
-				<div id="search-box">
-					<div className="search-container">
-						<span className="search-icon"><i className="fa fa-search"/></span>
-						<input id="search" type="text"
-							placeholder="Search..." onKeyPress={this.searchAlbums}/>
-					</div>
-				</div>
+		const sidebar = ( <SidebarComponent album={album} closeSidebar={this.closeSidebar}/> );
+					return (
+			<div>		
+				<SearchComponent searchHandler={this.searchAlbums}/>
 				{this.state.showSidebar ? sidebar : null}
-				{this.state.noMatch ? noMatchWarning : null}
+
 				<div id="collection">
 					<CollectionComponent activeAlbums={this.state.activeAlbums}
 						clickHandler={this.albumClick} update={this.state.updateColl}/>
 				</div>
+
 			</div>
 		);
 	}

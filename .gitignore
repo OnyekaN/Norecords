@@ -2,3 +2,6 @@ node_modules
 dist/bundle.js
 full_album_art
 album_art
+client_secret.json
+devkey
+devkey2

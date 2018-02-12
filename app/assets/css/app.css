@@ -5,7 +5,7 @@ html {
 body {
   padding: 50px;
   font: 12px "Lucida Grande", Times,sans-serif;
-	color: white !important;	
+	color: white !important;
 	background-color: #000 !important;
 	-background-image: url("/images/black_background.jpg") !important;
 	height: 100%;
@@ -13,19 +13,6 @@ body {
 
 a {
   color: #00B7FF;
-}
-
-##title-background {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 98%;
-	height: 110px;
-	border-bottom-left-radius: 30px;
-	border-bottom-right-radius: 30px;
-	background-color: #fffffb;
-	z-index: -100;
-	border-bottom: 2px solid #00B7FF;
 }
 
 #title-box {
@@ -37,9 +24,19 @@ a {
 	font: 6em "Permanent Marker", sans-serif;
 	color: white;
 	text-shadow: 3px 3px 0px #add8e6;
+	-animation: glow-shadow 10s 0.5s infinite;
 }
 
-#search-box {
+@keyframes glow-shadow {
+	0% { text-shadow: 3px 3px 0px #add8e6; }
+	25% { text-shadow: 3px 3px 0px #d92adf; }
+	50% { text-shadow: 3px 3px 0px #48cff2; }
+	75% { text-shadow: 3px 3px 0px #21fb33; }
+	100% { text-shadow: 3px 3px 0px #add8e6; }
+
+}
+
+.search-box {
 	background-color:;
 	position: fixed;
 	top: 20px;
@@ -49,6 +46,15 @@ a {
 	width: 20%;
 }
 
+.search-appear {
+	opacity: 0.01;
+}
+
+.search-appear-active {
+	opacity: 1;
+	transition: opacity .5s ease-in;
+}
+
 .search-container {
 	position: relative;
 	height: 30px;
@@ -56,7 +62,7 @@ a {
 
 .search-container #search {
 	float: left;
-	border: 1px solid rgba(50, 50, 50, 0.3);
+	border: 1px solid rgba(50, 50, 50, 0);
 	border-radius: 3px;
 	background-color: rgba(191, 224, 251, 0.2);
 	padding-left: 30px;
@@ -77,13 +83,13 @@ a {
 }
 
 #search::-webkit-input-placeholder {
-	color: white !important;
+	color: rgba(255, 255, 255, 0.6) !important;
 }
 #search::-moz-input-placeholder {
-	color: white !important;
+	color: rgba(255, 255, 255, 0.6) !important;
 }
 #search::-ms-input-placeholder {
-	color: white !important;
+	color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .search-container #search:hover, #search:focus, #search:active {
@@ -102,6 +108,27 @@ a {
 
 #search:hover::-moz-input-placeholder, #search:focus::-moz-input-placeholder {
 	color: #333 !important;
+}
+
+
+.search-display {
+	position: relative;
+	display: inline-block;
+	min-width:  400px;
+	margin: 0 0 15px 40px;
+}
+
+.search-display .search-clear {
+	height: 40px;
+	width: 40px;
+	margin: 10px;
+	color: rgb(0, 183, 255);
+
+}
+
+.search-display span {
+	font-size: 1.4em;
+	font-weight: bold;
 }
 
 #collection-container {
@@ -205,11 +232,10 @@ a {
 	-text-align: center;
 	color: #fff;
 	text-shadow: 0 0 3px #111;
-}
-#sidebar h2, b {
+	height: 34px;
 	margin: 5px 0px 10px 0px;
-	font-size: 1.6em;
-	min-width: 550px
+	font-size: 1.5em;
+	max-width: 100%;
 	white-space: nowrap;
 	overflow: scroll;
 }
@@ -261,6 +287,8 @@ a {
 	column-count: 2;
 }
 
+.songs ul li a { display: block; }
+
 .songs a {
 	color: #eee;
 	display: inline-block;
@@ -311,8 +339,8 @@ a {
 }
 
 .iframe-container iframe {
-	margin: 0px 30px 0 10px;
-	box-shadow: 0 0 2px #111;
+	margin: 2px 30px 0 10px;
+	box-shadow: 0 0 2px #888;
 }
 
 @-webkit-keyframes rotation {

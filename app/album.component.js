@@ -7,9 +7,9 @@ class AlbumComponent extends React.Component {
 		super(props);
 
 		this.state = {
-			album: this.props.album,	
+			album: this.props.album,
 		}
-		
+
 		this.handleClick = this.handleClick.bind(this);
 	}
 
@@ -18,15 +18,15 @@ class AlbumComponent extends React.Component {
 	}
 
 	render() {
-		return (	
+		return (
 			<div className="img-container"
 			 onClick={this.handleClick}>
 				<img className="thumb-img" src={this.state.album.art} alt={this.state.album.name} />
-					<div>	
+					<div>
 						<span>{this.state.album.name} - {this.state.album.artist}</span>
 					</div>
 			</div>
-		)	
+		)
 	}
 
 }

@@ -26,11 +26,11 @@ class SidebarComponent extends React.Component {
 						<h2><b>{album.name}</b></h2>
 						<div className="songs">
 							<ul>
-								{album.songs.map(obj => 
-								 	obj.youtube_link != 'N/A' ? 	
-										( 
+								{album.songs.map(obj =>
+								 	obj.youtube_link != 'N/A' ?
+										(
 										<li key={obj.song_name}>
-											<a href={obj.youtube_link.replace('watch?v=', 'embed/')+"?autoplay=1"} 
+											<a href={obj.youtube_link}
 													target="yt_iframe">
 												<img className="sidebar-play-button" src="images/play-button.png" style={{verticalAlign: 'middle'}} alt="play button"/><span>{obj.song_name}</span>
 											</a>

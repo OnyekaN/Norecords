@@ -19,7 +19,7 @@ router.get('/api/songs', (req, res, next) => {
 			console.log(err);
 			return res.status(500).json({success: false, data: err});
 		}
-		
+
 		const query = client.query('SELECT * FROM songs ORDER BY album DESC;')
 
 		query.on('row', (row) => {
@@ -130,7 +130,7 @@ router.get('/api/sorted_albums', (req, res, next) => {
 					if ( album[0].artwork_path == "N/A") {
 						albums[albumName].art = "/images/not_available.png";
 					} else { 
-						albums[albumName].art = album[0].artwork_path + '.jpg';
+						albums[albumName].art = album[0].artwork_path;
 					}
 					albumName = obj.album;
 					album = []
