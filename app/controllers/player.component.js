@@ -7,7 +7,9 @@ import SidebarComponent from './sidebar.component';
 import CollectionComponent from './collection.component';
 
 class PlayerComponent extends React.Component {
+
 	constructor(props) {
+
 		super(props);
 
 		this.state = {
@@ -19,12 +21,18 @@ class PlayerComponent extends React.Component {
 			keywords: [],
 		}
 
+		this.albumsByArtist = undefined;
+		this.albumsByAlbumName = undefined;
+		this.albumsByGenre = undefined;
+		this.albumsByYear = undefined;
 		this.albumClick = this.albumClick.bind(this);
 		this.closeSidebar = this.closeSidebar.bind(this);
 		this.searchAlbums = this.searchAlbums.bind(this);
+		this.sortAlbumsBy = this.sortAlbumsBy.bind(this);
 	}
 
 	componentDidMount() {
+
 		axios.get('/api/sorted_albums/')
 			.then(res => {
 				let albums = res.data,
@@ -41,6 +49,7 @@ class PlayerComponent extends React.Component {
 					let string = `${album.name} ${album.artist} ${album.genre} ${album.year}`
 					keywordsArray.push(string.toLowerCase());
 				});
+				this.albumsByArtist = albumsArray;
 				this.setState({allAlbums: albumsArray, activeAlbums: albumsArray});
 				this.setState({keywords: keywordsArray});
 			});
@@ -48,6 +57,7 @@ class PlayerComponent extends React.Component {
 	}
 
 	albumClick(album) {
+
 		if ( album == this.state.album ) {
 			this.setState({
 				showSidebar: !this.state.showSidebar,
@@ -65,6 +75,7 @@ class PlayerComponent extends React.Component {
 	}
 
 	closeSidebar() {
+
 		this.setState({
 			showSidebar: false,
 			updateColl: false
@@ -74,7 +85,7 @@ class PlayerComponent extends React.Component {
 	searchAlbums(text) {
 
 		if ( !text ) {
-			this.setState({activeAlbums: this.state.allAlbums, updateColl: true}); 
+			this.setState({activeAlbums: this.albumsByArtist, updateColl: true});
 			return;
 		}
 
@@ -82,13 +93,13 @@ class PlayerComponent extends React.Component {
 				searchText = text.toLowerCase(),
 				searchTerms = searchText.split(' ');
 
-		for ( let i = 0 ; i < this.state.allAlbums.length ; i++ ) {
+		for ( let i = 0 ; i < this.albumsByArtist.length ; i++ ) {
 			let match = true;
 			searchTerms.forEach(searchTerm => {
 				if ( this.state.keywords[i].indexOf(searchTerm) == -1 )
 					match = false;
 			});
-			match ? matchAlbums.push(this.state.allAlbums[i]) : null;
+			match ? matchAlbums.push(this.albumsByArtist[i]) : null;
 
 			if ( matchAlbums.length ) {
 				this.setState({activeAlbums: matchAlbums, updateColl: true});
@@ -100,12 +111,58 @@ class PlayerComponent extends React.Component {
 		}
 	}
 
+	sortAlbumsBy(sortOption) {
+
+		switch(sortOption) {
+			case 'Artist':
+				this.setState({allAlbums: this.albumsByArtist, activeAlbums: this.albumsByArtist});
+				break;
+			case 'Album':
+				if ( !this.albumsByAlbumName ) {
+					this.albumsByAlbumName = this.albumsByArtist.slice(0);
+					this.albumsByAlbumName.sort((a,b) => {
+					let nameA = a.name.toLowerCase(),
+							nameB = b.name.toLowerCase();
+					if ( nameA < nameB )
+						return -1;
+					if ( nameA > nameB )
+						return 1;
+					return 0;
+					});
+				}
+				this.setState({allAlbums: this.albumsByAlbumName, activeAlbums: this.albumsByAlbumName});
+				break;
+			case 'Year':
+				if ( !this.albumsByYear ) {
+					this.albumsByYear = this.albumsByArtist.slice(0);
+					this.albumsByYear.sort((a,b) => {
+					let yearA = a.year,
+							yearB = b.year;
+					if ( yearA > yearB )
+						return -1;
+					if ( yearA < yearB )
+						return 1;
+					return 0;
+					});
+				}
+				this.setState({allAlbums: this.albumsByYear, activeAlbums: this.albumsByYear});
+				break;
+			default:
+					console.log(sortOption);
+		}
+		if ( window.pageYOffset > 120 ) {
+					window.scrollTo(0, 120);
+				}
+	}
+
 	render() {
+
 		let album = this.state.album;
 		const sidebar = ( <SidebarComponent album={album} closeSidebar={this.closeSidebar}/> );
-					return (
-			<div>		
-				<SearchComponent searchHandler={this.searchAlbums}/>
+
+		return (
+			<div>
+				<SearchComponent searchHandler={this.searchAlbums} sortHandler={this.sortAlbumsBy}/>
 				{this.state.showSidebar ? sidebar : null}
 
 				<div id="collection">
