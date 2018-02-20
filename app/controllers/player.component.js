@@ -115,7 +115,8 @@ class PlayerComponent extends React.Component {
 
 		switch(sortOption) {
 			case 'Artist':
-				this.setState({allAlbums: this.albumsByArtist, activeAlbums: this.albumsByArtist});
+				this.setState({allAlbums: this.albumsByArtist, activeAlbums: this.albumsByArtist,
+												updateColl: true});
 				break;
 			case 'Album':
 				if ( !this.albumsByAlbumName ) {
@@ -130,7 +131,8 @@ class PlayerComponent extends React.Component {
 					return 0;
 					});
 				}
-				this.setState({allAlbums: this.albumsByAlbumName, activeAlbums: this.albumsByAlbumName});
+				this.setState({allAlbums: this.albumsByAlbumName, activeAlbums: this.albumsByAlbumName,
+												updateColl: true});
 				break;
 			case 'Year':
 				if ( !this.albumsByYear ) {
@@ -145,7 +147,8 @@ class PlayerComponent extends React.Component {
 					return 0;
 					});
 				}
-				this.setState({allAlbums: this.albumsByYear, activeAlbums: this.albumsByYear});
+				this.setState({allAlbums: this.albumsByYear, activeAlbums: this.albumsByYear,
+												updateColl: true});
 				break;
 			default:
 					console.log(sortOption);

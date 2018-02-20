@@ -24,8 +24,8 @@ class SidebarComponent extends React.Component {
 			<div id="sidebar" className="">
 				<div className="sidebar-container">
 					<button type="button" className="" onClick={this.props.closeSidebar}>X</button>
-					<div className="icon-container">
-						<img className="sidebar-image-icon" src={album.art} alt={album.name + " album cover"}/>
+					<div className="album-image-container">
+						<img className="sidebar-album-image" src={album.art} alt={album.name + " album cover"}/>
 					</div>
 					<div className="songs-container">
 						<h3>{album.artist}</h3>

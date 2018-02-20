@@ -25650,7 +25650,8 @@ var PlayerComponent = function (_React$Component) {
 
 			switch (sortOption) {
 				case 'Artist':
-					this.setState({ allAlbums: this.albumsByArtist, activeAlbums: this.albumsByArtist });
+					this.setState({ allAlbums: this.albumsByArtist, activeAlbums: this.albumsByArtist,
+						updateColl: true });
 					break;
 				case 'Album':
 					if (!this.albumsByAlbumName) {
@@ -25663,7 +25664,8 @@ var PlayerComponent = function (_React$Component) {
 							return 0;
 						});
 					}
-					this.setState({ allAlbums: this.albumsByAlbumName, activeAlbums: this.albumsByAlbumName });
+					this.setState({ allAlbums: this.albumsByAlbumName, activeAlbums: this.albumsByAlbumName,
+						updateColl: true });
 					break;
 				case 'Year':
 					if (!this.albumsByYear) {
@@ -25676,7 +25678,8 @@ var PlayerComponent = function (_React$Component) {
 							return 0;
 						});
 					}
-					this.setState({ allAlbums: this.albumsByYear, activeAlbums: this.albumsByYear });
+					this.setState({ allAlbums: this.albumsByYear, activeAlbums: this.albumsByYear,
+						updateColl: true });
 					break;
 				default:
 					console.log(sortOption);
@@ -25926,8 +25929,8 @@ var SidebarComponent = function (_React$Component) {
 					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'div',
-						{ className: 'icon-container' },
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-image-icon', src: album.art, alt: album.name + " album cover" })
+						{ className: 'album-image-container' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-album-image', src: album.art, alt: album.name + " album cover" })
 					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'div',

@@ -209,7 +209,6 @@ a {
 }
 
 .img-container:hover {
-	-box-shadow: 0px 0px 40px blue;
 	background-color: rgba(100, 100, 100, 0.3);
 	color: white;
 	font-size: 1em;
@@ -262,15 +261,15 @@ a {
 
 .sidebar-container {
 	display: flex;
-	flex-direction: row;
+	flex-direction: rowc;
 	justify-content: space-between;
 }
 
-.icon-container {
+.album-image-container {
 	margin-right: 2%;
 }
 
-.sidebar-image-icon {
+.sidebar-album-image {
 	height: 180px;
 	width: 180px;
 	margin: 10px 10px 15px 45px;
@@ -299,12 +298,13 @@ a {
 }
 
 #sidebar h4 {
-	position: relative;
+	z-index: 50;
 	font-family: "Helvetica";
-	font-size: 1em;
+	font-size: .9em;
+	font-weight: 100;
 	color: #398bdb77;
-	color: rgba(0, 183, 255, 0.5);
-	margin: 0px 0px 7px 12px;
+	color: #ffffffdd;
+	margin: 0px 0px 7px 2px;
 	text-shadow: 0 0 1px rgba(55, 55, 55, 0.5);
 }
 
@@ -336,10 +336,18 @@ a {
 .songs-container {
 	min-width: 300px;
 	width: 65%;
-	-box-shadow: 0px 0px 2px black;
-	-padding: 10px 0 0 10px;
-	-margin: -10px 0 0 0;
 }
+
+.songs {
+	position: absolute;
+	overflow: scroll;
+	height: 51%;
+	max-height: 150px;
+	width: 50%;
+	min-width: 400px;
+}
+
+
 
 .songs ul {
 	margin-top: 5px;
@@ -388,22 +396,13 @@ a {
 	text-shadow: 0px 0px 5px white;
 }
 
-.songs {
-	position: absolute;
-	overflow: scroll;
-	height: 50%;
-	max-height: 150px;
-	width: 50%;
-	min-width: 400px;
-}
-
 .iframe-container {
 	border-radius: 50%;
 }
 
 .iframe-container iframe {
 	margin: 2px 30px 0 10px;
-	box-shadow: 0 0 2px #888;
+	box-shadow: 0 0 5px -1px #bbbbbb88;
 }
 
 @-webkit-keyframes rotation {
