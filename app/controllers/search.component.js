@@ -5,6 +5,7 @@ import ReacDOM from 'react-dom'
 class SearchComponent extends React.Component {
 
 	constructor(props) {
+
 		super(props)
 
 		this.state = {
@@ -23,12 +24,14 @@ class SearchComponent extends React.Component {
 	}
 
 	componentWillMount() {
+
 		setTimeout(() => {
 			this.setState({show: "show"})
 		}, 3000);
 	}
 
 	handleSearch(e) {
+
 		if ( !e ) {
 			this.props.searchHandler("");
 			this.setState({search: null});
@@ -43,14 +46,17 @@ class SearchComponent extends React.Component {
 	}
 
 	clearSearch() {
+
 		this.handleSearch("");
 		this.setState({search: null});
 		document.getElementsByClassName("search-input")[0].value = "";
 	}
 
 	sortAlbums() {
+
 		let sortIndex = this.state.sortIndex % this.sortOptions.length,
 				sortOption = this.sortOptions[sortIndex];
+
 		this.props.sortHandler(sortOption);
 		this.setState({sortIndex: sortIndex + 1, sortOption: sortOption, sortHidden: ""});
 		setTimeout(() => {
@@ -59,13 +65,11 @@ class SearchComponent extends React.Component {
 
 	}
 
-
-
 	render() {
+
 		const clearSearchButton = (
 													<span className="search-clear" onClick={this.clearSearch}>
 														<i className="far fa-times-circle fa-lg"/>
-
 													</span> );
 
 		const searchInfo = (
@@ -76,19 +80,23 @@ class SearchComponent extends React.Component {
 							);
 
 		return (
-			<div className={"search-box " + this.state.show} key="search-box">
-				{this.state.search ? clearSearchButton : null}
+			<div className={"search-sort-container " + this.state.show} key="search-sort-container">
+
+				<div className="sort-container">
+					<span className={"sort-options " + this.state.sortHidden}>
+						{this.state.sortOption.toUpperCase()}
+					</span>
+					<a onClick={this.sortAlbums}>
+						<span className="sort-icon"><i className="fas fa-bars fa-2x"></i></span></a>
+				</div>
+
 				<div className="search-container">
 					<span className="search-icon"><i className="fa fa-search"/></span>
 					<input className="search-input" type="text"
 						placeholder="Search..." onKeyPress={this.handleSearch}/>
 				</div>
-				<div className="sort">
-					<a onClick={this.sortAlbums}>
-						<span className="sort-by"><i className="fas fa-bars fa-lg"></i></span>
-					</a>
-					<span className={"sort-options " + this.state.sortHidden}>{this.state.sortOption}</span>
-				</div>
+
+				{this.state.search ? clearSearchButton : null}
 
 
 			</div>

@@ -31,31 +31,10 @@ class SidebarComponent extends React.Component {
 						<h3>{album.artist}</h3>
 						<h2><b>{album.name}</b></h2>
 						<h4>{yearGenre}</h4>
-						<div className="songs">
-							<ul>
-								{album.songs.map(obj =>
-								 	obj.youtube_link != 'N/A' ?
-										(
-										<li key={obj.song_name}>
-											<a href={obj.youtube_link}
-													target="yt_iframe">
-												<img className="sidebar-play-button" src="images/play-button.png" style={{verticalAlign: 'middle'}} alt="play button"/><span>{obj.song_name}</span>
-											</a>
-										</li>
-										) :
-										(
-										<li key={obj.song_name} style={{color:'#555', fontSize:'1em'}}>{obj.song_name}</li> 
-										)
-									)}
-							</ul>
-						</div>
+						<SongComponent songs={album.songs} />
 					</div>
-					<div className="iframe-container">
-						<iframe height="200px" width="200px" src="" frameBorder="0"  name="yt_iframe"></iframe>
-					</div>
-
 				</div>
-			</div>		
+			</div>
 		);
 	}
 }
