@@ -19,6 +19,7 @@ class PlayerComponent extends React.Component {
 			allAlbums: undefined,
 			activeAlbums: undefined,
 			keywords: [],
+			ytActive: ""
 		}
 
 		this.albumsByArtist = undefined;
@@ -28,6 +29,18 @@ class PlayerComponent extends React.Component {
 		this.closeSidebar = this.closeSidebar.bind(this);
 		this.searchAlbums = this.searchAlbums.bind(this);
 		this.sortAlbumsBy = this.sortAlbumsBy.bind(this);
+		this.closeYtPlayer = this.closeYtPlayer.bind(this);
+		this.ytPlayerEvent = this.ytPlayerEvent.bind(this);
+		this.ytScriptInit();
+		this.ytPlayerContainer = document.getElementsByClassName('yt-player-container')[0];
+
+		window['onYouTubeIframeAPIReady'] = (e) => {
+				this.YT = window['YT'];
+				this.ytPlayer = new window['YT'].Player('player', {
+					videoId: '',
+				});
+			};
+
 	}
 
 	componentDidMount() {
@@ -79,6 +92,25 @@ class PlayerComponent extends React.Component {
 			showSidebar: false,
 			updateColl: false
 		})
+	}
+
+	ytScriptInit() {
+		let tag = document.createElement('script');
+		tag.src = 'https://www.youtube.com/iframe_api';
+ 		let firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	}
+
+	ytPlayerEvent(videoIDs, index) {
+		if ( this.ytPlayer ) {
+			this.setState({ytActive: "yt-appear-active"});
+			this.ytPlayer.loadPlaylist(videoIDs, index);
+		}
+	}
+
+	closeYtPlayer() {
+		this.setState({ytActive: ""});
+		this.ytPlayer.stopVideo();
 	}
 
 	searchAlbums(text) {
@@ -160,7 +192,8 @@ class PlayerComponent extends React.Component {
 	render() {
 
 		let album = this.state.album;
-		const sidebar = ( <SidebarComponent album={album} closeSidebar={this.closeSidebar}/> );
+		const sidebar = ( <SidebarComponent album={album} closeSidebar={this.closeSidebar}
+												ytPlayerEvent={this.ytPlayerEvent}/> );
 
 		return (
 			<div>
@@ -170,6 +203,16 @@ class PlayerComponent extends React.Component {
 				<div id="collection">
 					<CollectionComponent activeAlbums={this.state.activeAlbums}
 						clickHandler={this.albumClick} update={this.state.updateColl}/>
+				</div>
+				<div className={"yt-player-container yt-appear "+this.state.ytActive}>
+					<a onClick={this.closeYtPlayer}>
+						<span className="yt-close-icon">
+							<i className="fas fa-times-circle"></i>
+						</span>
+					</a>
+					<div id="player" className="embed-responsive embed-responsive-16by9"
+						style={{height:'200px', width:'200px'}}>
+					</div>
 				</div>
 
 			</div>

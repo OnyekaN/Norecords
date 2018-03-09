@@ -189,6 +189,42 @@ a {
 	color: rgb(0, 183, 255);
 }
 
+.yt-player-container {
+	visibility: hidden;
+	position: fixed;
+	bottom: 9px;
+	right: 10px;
+	height: 200px;
+	width: 200px;
+	-box-shadow: 0px 0px 7px -1px #ddd;
+	background-color: blue;
+	z-index: 2000;
+	opacity: 0.6;
+}
+
+.yt-close-icon {
+	position: absolute;
+	color: red;
+	-background-color: black;
+	border-radius: 8px;
+	opacity: 1;
+	top: -3px;
+	left: -3px;
+	cursor: pointer;
+	z-index: 5000;
+}
+
+.yt-appear {
+	opacity: 0.01;
+}
+
+.yt-appear-active {
+	opacity: 0.8;
+	transition: opacity .5s ease-in;
+}
+
+#player {
+}
 
 #collection-container {
 	position: relative;
@@ -269,7 +305,7 @@ a {
 .sidebar-container {
 	display: flex;
 	flex-direction: rowc;
-	justify-content: space-between;
+	justify-content: left; 
 }
 
 .album-image-container {
@@ -287,25 +323,26 @@ a {
 }
 
 #sidebar h2, b {
-	-text-align: center;
 	color: #fff;
 	text-shadow: 0 0 3px #111;
 	height: 34px;
+	min-width: 80%;
 	margin: 5px 0px 2px 0px;
 	font-size: 1.5em;
 	max-width: 100%;
 	white-space: nowrap;
 	overflow: scroll;
+	z-index: 2000;
 }
 
 #sidebar h3 {
 	margin: 5px 0px 5px 0px;
 	text-shadow: 0 0 2px #111;
 	font-size: 1.7em;
+	z-index: 3000;
 }
 
 #sidebar h4 {
-	z-index: 50;
 	font-family: "Permanent Marker";
 	font-size: .9em;
 	font-weight: 100;
@@ -344,6 +381,7 @@ a {
 	min-width: 300px;
 	width: 65%;
 	margin-left: 20px;
+	z-index: 3000;
 }
 
 .songs {
@@ -370,6 +408,7 @@ a {
 
 .songs a {
 	color: #eee;
+	cursor: pointer;
 	display: inline-block;
 	font-family: "Righteous";
 	text-decoration: none;

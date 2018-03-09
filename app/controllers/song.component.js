@@ -6,6 +6,7 @@ class SongComponent extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.ytPlayer = document.getElementsByClassName('yt-player-container')[0];
 		this.songClick = this.songClick.bind(this);
 	}
 
@@ -15,15 +16,22 @@ class SongComponent extends React.Component {
 					obj.index = index;
 					return obj.youtube_link.replace('https://youtube.com/embed/', '')
 							.replace('?autoplay=1', '');
-				});
+		});
 	}
 
 	songClick(index) {
-		console.log(this.videoIDs);
-		this.props.ytPlayerEvent(this.videoIDs.join(','), index);
+		this.props.ytPlayerEvent(this.videoIDs, index);
+		this.ytPlayer.style.visibility = "visible";
 	}
 
 	render() {
+
+		this.songs = this.props.songs;
+		this.videoIDs = this.songs.map((obj, index) => {
+					obj.index = index;
+					return obj.youtube_link.replace('https://youtube.com/embed/', '')
+							.replace('?autoplay=1', '');
+		});
 
 		return (
 						<div className="songs">

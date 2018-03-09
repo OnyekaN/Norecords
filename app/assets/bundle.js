@@ -11256,7 +11256,8 @@ var PlayerComponent = function (_React$Component) {
 			album: undefined,
 			allAlbums: undefined,
 			activeAlbums: undefined,
-			keywords: []
+			keywords: [],
+			ytActive: ""
 		};
 
 		_this.albumsByArtist = undefined;
@@ -11266,6 +11267,18 @@ var PlayerComponent = function (_React$Component) {
 		_this.closeSidebar = _this.closeSidebar.bind(_this);
 		_this.searchAlbums = _this.searchAlbums.bind(_this);
 		_this.sortAlbumsBy = _this.sortAlbumsBy.bind(_this);
+		_this.closeYtPlayer = _this.closeYtPlayer.bind(_this);
+		_this.ytPlayerEvent = _this.ytPlayerEvent.bind(_this);
+		_this.ytScriptInit();
+		_this.ytPlayerContainer = document.getElementsByClassName('yt-player-container')[0];
+
+		window['onYouTubeIframeAPIReady'] = function (e) {
+			_this.YT = window['YT'];
+			_this.ytPlayer = new window['YT'].Player('player', {
+				videoId: ''
+			});
+		};
+
 		return _this;
 	}
 
@@ -11324,6 +11337,28 @@ var PlayerComponent = function (_React$Component) {
 				showSidebar: false,
 				updateColl: false
 			});
+		}
+	}, {
+		key: 'ytScriptInit',
+		value: function ytScriptInit() {
+			var tag = document.createElement('script');
+			tag.src = 'https://www.youtube.com/iframe_api';
+			var firstScriptTag = document.getElementsByTagName('script')[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		}
+	}, {
+		key: 'ytPlayerEvent',
+		value: function ytPlayerEvent(videoIDs, index) {
+			if (this.ytPlayer) {
+				this.setState({ ytActive: "yt-appear-active" });
+				this.ytPlayer.loadPlaylist(videoIDs, index);
+			}
+		}
+	}, {
+		key: 'closeYtPlayer',
+		value: function closeYtPlayer() {
+			this.setState({ ytActive: "" });
+			this.ytPlayer.stopVideo();
 		}
 	}, {
 		key: 'searchAlbums',
@@ -11407,7 +11442,8 @@ var PlayerComponent = function (_React$Component) {
 		value: function render() {
 
 			var album = this.state.album;
-			var sidebar = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__sidebar_component__["a" /* default */], { album: album, closeSidebar: this.closeSidebar });
+			var sidebar = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__sidebar_component__["a" /* default */], { album: album, closeSidebar: this.closeSidebar,
+				ytPlayerEvent: this.ytPlayerEvent });
 
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
@@ -11419,6 +11455,21 @@ var PlayerComponent = function (_React$Component) {
 					{ id: 'collection' },
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__collection_component__["a" /* default */], { activeAlbums: this.state.activeAlbums,
 						clickHandler: this.albumClick, update: this.state.updateColl })
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: "yt-player-container yt-appear " + this.state.ytActive },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'a',
+						{ onClick: this.closeYtPlayer },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'span',
+							{ className: 'yt-close-icon' },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-times-circle' })
+						)
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { id: 'player', className: 'embed-responsive embed-responsive-16by9',
+						style: { height: '200px', width: '200px' } })
 				)
 			);
 		}
@@ -11618,54 +11669,10 @@ var SidebarComponent = function (_React$Component) {
 	function SidebarComponent(props) {
 		_classCallCheck(this, SidebarComponent);
 
-		var _this = _possibleConstructorReturn(this, (SidebarComponent.__proto__ || Object.getPrototypeOf(SidebarComponent)).call(this, props));
-
-		_this.ytScriptInit();
-		_this.video = '';
-
-		window['onYouTubeIframeAPIReady'] = function (e) {
-			_this.YT = window['YT'];
-			_this.player = new window['YT'].Player('player', {
-				videoId: '',
-				events: {
-					'onStateChange': _this.onPlayerStateChange.bind(_this),
-					'onReady': function onReady(e) {}
-				}
-			});
-		};
-
-		_this.ytPlayerEvent = _this.ytPlayerEvent.bind(_this);
-		return _this;
+		return _possibleConstructorReturn(this, (SidebarComponent.__proto__ || Object.getPrototypeOf(SidebarComponent)).call(this, props));
 	}
 
 	_createClass(SidebarComponent, [{
-		key: 'ytScriptInit',
-		value: function ytScriptInit() {
-			var tag = document.createElement('script');
-			tag.src = 'https://www.youtube.com/iframe_api';
-			var firstScriptTag = document.getElementsByTagName('script')[0];
-			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-		}
-	}, {
-		key: 'ytPlayerEvent',
-		value: function ytPlayerEvent(videoIDs, index) {
-			if (this.player) {
-				this.player.loadPlaylist(videoIDs, index);
-			}
-		}
-	}, {
-		key: 'onPlayerStateChange',
-		value: function onPlayerStateChange(event) {
-			console.log(event);
-			switch (event.data) {
-				case window['YT'].PlayerState.PLAYING:
-					break;
-				case window['YT'].PlayerState.ENDED:
-					console.log('ended ');
-					break;
-			};
-		}
-	}, {
 		key: 'render',
 		value: function render() {
 			var album = this.props.album,
@@ -11716,13 +11723,7 @@ var SidebarComponent = function (_React$Component) {
 							null,
 							yearGenre
 						),
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__song_component__["a" /* default */], { songs: album.songs, ytPlayerEvent: this.ytPlayerEvent })
-					),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'div',
-						{ className: 'iframe-container' },
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'embed-responsive embed-responsive-16by9', id: 'player',
-							style: { height: '200px', width: '200px' } })
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__song_component__["a" /* default */], { songs: album.songs, ytPlayerEvent: this.props.ytPlayerEvent })
 					)
 				)
 			);
@@ -11764,6 +11765,7 @@ var SongComponent = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (SongComponent.__proto__ || Object.getPrototypeOf(SongComponent)).call(this, props));
 
+		_this.ytPlayer = document.getElementsByClassName('yt-player-container')[0];
 		_this.songClick = _this.songClick.bind(_this);
 		return _this;
 	}
@@ -11780,13 +11782,19 @@ var SongComponent = function (_React$Component) {
 	}, {
 		key: 'songClick',
 		value: function songClick(index) {
-			console.log(this.videoIDs);
-			this.props.ytPlayerEvent(this.videoIDs.join(','), index);
+			this.props.ytPlayerEvent(this.videoIDs, index);
+			this.ytPlayer.style.visibility = "visible";
 		}
 	}, {
 		key: 'render',
 		value: function render() {
 			var _this2 = this;
+
+			this.songs = this.props.songs;
+			this.videoIDs = this.songs.map(function (obj, index) {
+				obj.index = index;
+				return obj.youtube_link.replace('https://youtube.com/embed/', '').replace('?autoplay=1', '');
+			});
 
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
