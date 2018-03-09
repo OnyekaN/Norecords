@@ -170,7 +170,6 @@ a {
 	float: right;
 	margin: 11px 48px 0 0;
 	font-family: "Permanent Marker";
-	font-weight: ;
 	opacity: 1;
 	color: #ddd;
 }
@@ -307,7 +306,7 @@ a {
 
 #sidebar h4 {
 	z-index: 50;
-	font-family: "Helvetica";
+	font-family: "Permanent Marker";
 	font-size: .9em;
 	font-weight: 100;
 	color: #398bdb77;
@@ -344,7 +343,7 @@ a {
 .songs-container {
 	min-width: 300px;
 	width: 65%;
-	margin-left: 10px;
+	margin-left: 20px;
 }
 
 .songs {

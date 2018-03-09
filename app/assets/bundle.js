@@ -11261,7 +11261,6 @@ var PlayerComponent = function (_React$Component) {
 
 		_this.albumsByArtist = undefined;
 		_this.albumsByAlbumName = undefined;
-		_this.albumsByGenre = undefined;
 		_this.albumsByYear = undefined;
 		_this.albumClick = _this.albumClick.bind(_this);
 		_this.closeSidebar = _this.closeSidebar.bind(_this);
@@ -11464,11 +11463,11 @@ var SearchComponent = function (_React$Component) {
 			show: "",
 			search: null,
 			sortHidden: "sort-hidden",
-			sortIndex: 0,
+			sortIndex: 1,
 			sortOption: "Artist"
 		};
 
-		_this.sortOptions = ["Artist", "Album", "Genre", "Year"], _this.handleSearch = _this.handleSearch.bind(_this);
+		_this.sortOptions = ["Artist", "Album", "Year"], _this.handleSearch = _this.handleSearch.bind(_this);
 		_this.clearSearch = _this.clearSearch.bind(_this);
 		_this.sortAlbums = _this.sortAlbums.bind(_this);
 
@@ -11619,10 +11618,54 @@ var SidebarComponent = function (_React$Component) {
 	function SidebarComponent(props) {
 		_classCallCheck(this, SidebarComponent);
 
-		return _possibleConstructorReturn(this, (SidebarComponent.__proto__ || Object.getPrototypeOf(SidebarComponent)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (SidebarComponent.__proto__ || Object.getPrototypeOf(SidebarComponent)).call(this, props));
+
+		_this.ytScriptInit();
+		_this.video = '';
+
+		window['onYouTubeIframeAPIReady'] = function (e) {
+			_this.YT = window['YT'];
+			_this.player = new window['YT'].Player('player', {
+				videoId: '',
+				events: {
+					'onStateChange': _this.onPlayerStateChange.bind(_this),
+					'onReady': function onReady(e) {}
+				}
+			});
+		};
+
+		_this.ytPlayerEvent = _this.ytPlayerEvent.bind(_this);
+		return _this;
 	}
 
 	_createClass(SidebarComponent, [{
+		key: 'ytScriptInit',
+		value: function ytScriptInit() {
+			var tag = document.createElement('script');
+			tag.src = 'https://www.youtube.com/iframe_api';
+			var firstScriptTag = document.getElementsByTagName('script')[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		}
+	}, {
+		key: 'ytPlayerEvent',
+		value: function ytPlayerEvent(videoIDs, index) {
+			if (this.player) {
+				this.player.loadPlaylist(videoIDs, index);
+			}
+		}
+	}, {
+		key: 'onPlayerStateChange',
+		value: function onPlayerStateChange(event) {
+			console.log(event);
+			switch (event.data) {
+				case window['YT'].PlayerState.PLAYING:
+					break;
+				case window['YT'].PlayerState.ENDED:
+					console.log('ended ');
+					break;
+			};
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			var album = this.props.album,
@@ -11673,7 +11716,13 @@ var SidebarComponent = function (_React$Component) {
 							null,
 							yearGenre
 						),
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__song_component__["a" /* default */], { songs: album.songs })
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__song_component__["a" /* default */], { songs: album.songs, ytPlayerEvent: this.ytPlayerEvent })
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'iframe-container' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'embed-responsive embed-responsive-16by9', id: 'player',
+							style: { height: '200px', width: '200px' } })
 					)
 				)
 			);
@@ -11713,12 +11762,31 @@ var SongComponent = function (_React$Component) {
 	function SongComponent(props) {
 		_classCallCheck(this, SongComponent);
 
-		return _possibleConstructorReturn(this, (SongComponent.__proto__ || Object.getPrototypeOf(SongComponent)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (SongComponent.__proto__ || Object.getPrototypeOf(SongComponent)).call(this, props));
+
+		_this.songClick = _this.songClick.bind(_this);
+		return _this;
 	}
 
 	_createClass(SongComponent, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.songs = this.props.songs;
+			this.videoIDs = this.songs.map(function (obj, index) {
+				obj.index = index;
+				return obj.youtube_link.replace('https://youtube.com/embed/', '').replace('?autoplay=1', '');
+			});
+		}
+	}, {
+		key: 'songClick',
+		value: function songClick(index) {
+			console.log(this.videoIDs);
+			this.props.ytPlayerEvent(this.videoIDs.join(','), index);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
 
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
@@ -11726,15 +11794,17 @@ var SongComponent = function (_React$Component) {
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'ul',
 					null,
-					this.props.songs.map(function (obj) {
+					this.props.songs.map(function (obj, index) {
 						return obj.youtube_link != 'N/A' ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							'li',
 							{ key: obj.song_name },
 							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 								'a',
-								{ href: obj.youtube_link,
-									target: 'yt_iframe' },
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-play-button', src: 'images/play-button.png', style: { verticalAlign: 'middle' }, alt: 'play button' }),
+								{ onClick: function onClick(e) {
+										return _this2.songClick(index);
+									} },
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'sidebar-play-button', src: 'images/play-button.png',
+									style: { verticalAlign: 'middle' }, alt: 'play button' }),
 								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 									'span',
 									null,
@@ -11743,7 +11813,7 @@ var SongComponent = function (_React$Component) {
 							)
 						) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							'li',
-							{ key: obj.song_name, style: { color: '#555', fontSize: '1em' } },
+							{ key: obj.song_name, style: { color: '#888', fontSize: '1em' } },
 							obj.song_name
 						);
 					})

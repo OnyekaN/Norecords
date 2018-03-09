@@ -1,13 +1,54 @@
 'use strict'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SongComponent from './song.component';
+import SongsComponent from './song.component';
+
 
 class SidebarComponent extends React.Component {
 	constructor(props) {
 		super(props);
+		this.ytScriptInit();
+		this.video = '';
 
+		window['onYouTubeIframeAPIReady'] = (e) => {
+				this.YT = window['YT'];
+				this.player = new window['YT'].Player('player', {
+					videoId: '',
+					events: {
+						'onStateChange': this.onPlayerStateChange.bind(this),
+						'onReady': (e) => {
+						}
+					}
+				});
+			};
+
+
+		this.ytPlayerEvent = this.ytPlayerEvent.bind(this);
 	}
+
+	ytScriptInit() {
+		let tag = document.createElement('script');
+		tag.src = 'https://www.youtube.com/iframe_api';
+ 		let firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	}
+
+	ytPlayerEvent(videoIDs, index) {
+		if ( this.player ) {
+			this.player.loadPlaylist(videoIDs, index);
+		}
+	}
+
+	onPlayerStateChange(event) {
+			console.log(event)
+			switch (event.data) {
+				case window['YT'].PlayerState.PLAYING:
+					break;
+				case window['YT'].PlayerState.ENDED:
+					console.log('ended ');
+					break;
+			};
+		};
 
 	render() {
 		let album = this.props.album,
@@ -31,7 +72,11 @@ class SidebarComponent extends React.Component {
 						<h3>{album.artist}</h3>
 						<h2><b>{album.name}</b></h2>
 						<h4>{yearGenre}</h4>
-						<SongComponent songs={album.songs} />
+						<SongsComponent songs={album.songs} ytPlayerEvent={this.ytPlayerEvent}/>
+					</div>
+					<div className="iframe-container">
+						<div className="embed-responsive embed-responsive-16by9" id="player"
+								style={{height:'200px',width:'200px'}}></div>
 					</div>
 				</div>
 			</div>

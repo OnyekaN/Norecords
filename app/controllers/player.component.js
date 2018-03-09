@@ -23,7 +23,6 @@ class PlayerComponent extends React.Component {
 
 		this.albumsByArtist = undefined;
 		this.albumsByAlbumName = undefined;
-		this.albumsByGenre = undefined;
 		this.albumsByYear = undefined;
 		this.albumClick = this.albumClick.bind(this);
 		this.closeSidebar = this.closeSidebar.bind(this);
@@ -150,7 +149,7 @@ class PlayerComponent extends React.Component {
 				this.setState({allAlbums: this.albumsByYear, activeAlbums: this.albumsByYear,
 												updateColl: true});
 				break;
-			default:
+						default:
 					console.log(sortOption);
 		}
 		if ( window.pageYOffset > 120 ) {

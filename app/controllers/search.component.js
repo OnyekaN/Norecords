@@ -12,11 +12,11 @@ class SearchComponent extends React.Component {
 			show: "",
 			search: null,
 			sortHidden: "sort-hidden",
-			sortIndex: 0,
+			sortIndex: 1,
 			sortOption: "Artist",
 		}
 
-		this.sortOptions = ["Artist", "Album", "Genre", "Year"],
+		this.sortOptions = ["Artist", "Album", "Year"],
 		this.handleSearch = this.handleSearch.bind(this);
 		this.clearSearch = this.clearSearch.bind(this);
 		this.sortAlbums = this.sortAlbums.bind(this);
