@@ -11771,15 +11771,6 @@ var SongComponent = function (_React$Component) {
 	}
 
 	_createClass(SongComponent, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			this.songs = this.props.songs;
-			this.videoIDs = this.songs.map(function (obj, index) {
-				obj.index = index;
-				return obj.youtube_link.replace('https://youtube.com/embed/', '').replace('?autoplay=1', '');
-			});
-		}
-	}, {
 		key: 'songClick',
 		value: function songClick(index) {
 			this.props.ytPlayerEvent(this.videoIDs, index);
