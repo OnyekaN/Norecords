@@ -4,7 +4,8 @@ NORECORDS
 
 Welcome to NORECORDS; everything here is digital.
 
-This is an archive of albums with links to individual tracks
-sourced from Youtube wherever avaiable.
+You can look through the catalogue of albums and play any that catches
+your eye.  The vast majority of them are playable.
 
-Enjoy.
+Nothing is stolen ;)
+

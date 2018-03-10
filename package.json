@@ -7,8 +7,6 @@
     "devel": "node_modules/nodemon/bin/nodemon.js ./bin/www"
   },
   "dependencies": {
-    "angular": "^1.6.4",
-    "angular-ui-router": "^1.0.3",
     "axios": "^0.16.1",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
