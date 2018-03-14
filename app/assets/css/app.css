@@ -208,6 +208,7 @@ a {
 	left: -3px;
 	cursor: pointer;
 	color: #d60e14;
+	color: #777;
 	opacity: 1;
 	z-index: 5000;
 }
@@ -324,16 +325,18 @@ a {
 	color: #fff;
 	text-shadow: 0 0 3px #111;
 	height: 34px;
-	min-width: 80%;
-	margin: 5px 0px 2px 0px;
+	margin: 0px 0px 2px 0px;
 	font-size: 1.5em;
+	min-width: 85%;
 	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: scroll;
 	z-index: 2000;
 }
 
 #sidebar h3 {
+	overflow: hidden;
 	margin: 5px 0px 5px 0px;
 	text-shadow: 0 0 2px #111;
 	font-size: 1.7em;
@@ -341,6 +344,7 @@ a {
 }
 
 #sidebar h4 {
+	overflow: hidden;
 	font-family: "Permanent Marker";
 	font-size: .9em;
 	font-weight: 100;
@@ -384,7 +388,7 @@ a {
 
 .songs {
 	position: absolute;
-	overflow: scroll;
+	overflow: hidden;
 	height: 51%;
 	max-height: 150px;
 	width: 50%;
@@ -422,7 +426,7 @@ a {
 }
 
 .songs li {
-	overflow: scroll;
+	text-overflow: ellipsis;
 	height: 21px;
 	width: auto;
 	white-space: nowrap;
