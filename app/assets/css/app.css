@@ -388,13 +388,12 @@ a {
 
 .songs {
 	position: absolute;
-	overflow: hidden;
+	overflow: scroll;
 	height: 51%;
 	max-height: 150px;
 	width: 50%;
 	min-width: 400px;
 }
-
 
 
 .songs ul {

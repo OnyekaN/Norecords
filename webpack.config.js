@@ -1,13 +1,16 @@
+const webpack = require('webpack');
 const path = require('path');
+const PROD = (process.env.NODE_ENV === 'production');
 
 module.exports = {
 	context: path.join(__dirname, 'app'),
+	devtool: "source-map",
 	entry: [
 		'./app.js',
 	],
 	output: {
 		path: path.join(__dirname, 'app/assets'),
-		filename: 'bundle.js',
+		filename: PROD ? 'bundle.min.js': 'bundle.js'
 	},
 	module: {
 		rules: [
@@ -20,6 +23,14 @@ module.exports = {
 			},
 		],
 	},
+	plugins: [
+		new webpack.optimize.UglifyJsPlugin({
+			sourceMap: true,
+			output: {
+				comments: false,
+			},
+		}),
+	],
 	resolve: {
 		modules: [
 			path.join(__dirname, 'node_modules'),
