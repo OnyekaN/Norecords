@@ -388,7 +388,7 @@ a {
 
 .songs {
 	position: absolute;
-	overflow: scroll;
+	overflow-y: auto;
 	height: 51%;
 	max-height: 150px;
 	width: 50%;

@@ -4,7 +4,7 @@ const PROD = (process.env.NODE_ENV === 'production');
 
 module.exports = {
 	context: path.join(__dirname, 'app'),
-	devtool: "source-map",
+	//devtool: "source-map",
 	entry: [
 		'./app.js',
 	],
@@ -22,7 +22,7 @@ module.exports = {
 				],
 			},
 		],
-	},
+	}, /*
 	plugins: [
 		new webpack.optimize.UglifyJsPlugin({
 			sourceMap: true,
@@ -30,7 +30,7 @@ module.exports = {
 				comments: false,
 			},
 		}),
-	],
+	], */
 	resolve: {
 		modules: [
 			path.join(__dirname, 'node_modules'),
