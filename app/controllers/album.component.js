@@ -15,6 +15,12 @@ class AlbumComponent extends React.Component {
 
 	handleClick() {
 		this.props.clickHandler(this.state.album);
+		ga('send', {
+			hitType: 'event',
+			eventCategory: 'Albums',
+			eventAction: 'select',
+			eventLabel: 'Click Albums'
+		});
 	}
 
 	render() {

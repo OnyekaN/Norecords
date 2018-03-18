@@ -11065,6 +11065,12 @@ var AlbumComponent = function (_React$Component) {
 		key: 'handleClick',
 		value: function handleClick() {
 			this.props.clickHandler(this.state.album);
+			ga('send', {
+				hitType: 'event',
+				eventCategory: 'Albums',
+				eventAction: 'select',
+				eventLabel: 'Click Albums'
+			});
 		}
 	}, {
 		key: 'render',
