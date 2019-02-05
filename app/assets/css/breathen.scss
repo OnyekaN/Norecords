@@ -2,6 +2,7 @@ body {
 	padding: 10px 0 0 20px;
 }
 .header {
+	position: relative;
 	height: 100px;
 	width: 100%;
 
@@ -14,8 +15,51 @@ body {
 }
 
 .audio {
+	position: relative;
+	height: auto;
+	margin: 0px 0px 30px 20px;
 	h3 {
 		color: #49c;
 		font-family: Helvetica;
 	}
 }
+
+.metronome {
+	position: relative;
+	margin: 20px 0 0 10px;
+	iframe {
+		height: 400px;
+		width: 400px;
+	}
+}
+
+@media only screen and (max-device-width: 480px) {
+
+	.header {
+		height: 150px;
+		h2 {
+			font-size: 7em;
+		}
+	}
+	.audio {
+		padding: 20px;
+		audio {
+			left: 40px;
+			margin: 5px 0 40px 250px;
+			transform: scale(2.50);
+		}
+		h3 {
+			font-size: 4em;
+		}
+	}
+
+	.metronome {
+		margin: 50px 0 0 40px;
+		iframe {
+			width: 80%;
+		}
+
+	}
+}
+
+
