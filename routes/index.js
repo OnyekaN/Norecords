@@ -9,6 +9,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'NORECORDS' });
 });
 
+router.get('/breathen', function(req, res, next) {
+	res.render('breathen');
+});
+
 /* GET songs */
 router.get('/api/songs', (req, res, next) => {
 	const results = [];

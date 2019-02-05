@@ -71,9 +71,9 @@ def add_songs_dicts(albums_dict_list, start=0, interval=50):
                 print song_dict
         album[1]['SONGS_DICT'] = songs_dict
 	if i % interval is 0:
-	    pickle.dump(albums_dict_list, open("albumsDictList.p", "wb"))
+	    pickle.dump(albums_dict_list, open("albumsDictList2.p", "wb"))
 
-    pickle.dump(albums_dict_list, open("albumsDictList.p", "wb"))
+    pickle.dump(albums_dict_list, open("albumsDictList2.p", "wb"))
     return
 
 if __name__ == '__main__':
