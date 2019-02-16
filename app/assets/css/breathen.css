@@ -1,5 +1,6 @@
 body {
-  padding: 10px 0 0 20px; }
+  padding: 10px 0 0 20px;
+  margin: 0 0 100px 0; }
 
 .header {
   position: relative;
@@ -24,6 +25,13 @@ body {
   margin: 20px 0 0 10px; }
   .metronome iframe {
     height: 400px;
+    width: 400px; }
+
+.timer {
+  position: relative;
+  margin: 50px 0 0 10px; }
+  .timer iframe {
+    height: 200px;
     width: 400px; }
 
 @media only screen and (max-device-width: 480px) {

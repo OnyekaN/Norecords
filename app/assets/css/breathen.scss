@@ -1,5 +1,6 @@
 body {
 	padding: 10px 0 0 20px;
+	margin: 0 0 100px 0;
 }
 .header {
 	position: relative;
@@ -29,6 +30,16 @@ body {
 	margin: 20px 0 0 10px;
 	iframe {
 		height: 400px;
+		width: 400px;
+	}
+
+}
+
+.timer {
+	position: relative;
+	margin: 50px 0 0 10px;
+	iframe {
+		height: 200px;
 		width: 400px;
 	}
 }
