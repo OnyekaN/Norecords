@@ -4,8 +4,6 @@ NORECORDS
 
 Welcome to NORECORDS; everything here is digital.
 
-You can look through the catalogue of albums and play any that catches
-your eye.  The vast majority of them are playable.
+You can look through the catalogue of albums and play anything particularly eye-catching.  The majority are playable in browser.
 
-Nothing is stolen ;)
-
+No records were harmed in the making of this website.
