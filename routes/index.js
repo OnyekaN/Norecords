@@ -13,6 +13,10 @@ router.get('/breathen', function(req, res, next) {
 	res.render('breathen');
 });
 
+router.get('/msclock', function(req, res, next) {
+	res.render('msclock');
+});
+
 /* GET songs */
 router.get('/api/songs', (req, res, next) => {
 	const results = [];
